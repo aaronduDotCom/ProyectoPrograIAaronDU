@@ -16,7 +16,7 @@ protected:
 public:
     Persona();
     Persona(string nombre, int identificacion);
-    ~Persona();
+    virtual ~Persona();
 
     string getNombre();
     void setNombre(string nombre);

@@ -20,6 +20,8 @@ public:
     Estudiante();
     Estudiante(string nombre, int id);
     ~Estudiante();
+    bool matricularCurso(Curso *curso);
+    bool desmatricularCurso(int cod);
     string toString();
 };
 

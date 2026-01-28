@@ -16,6 +16,15 @@ Profesor::~Profesor() {
     delete horario;
 }
 
+bool Profesor::asignarCurso(Curso *curso) {
+}
+
+bool Profesor::desasignarCurso(int cod) {
+}
+
+void Profesor::asignarNota(Estudiante *estudiante) {
+}
+
 string Profesor::toString() {
     stringstream ss;
     ss << Persona::toString();

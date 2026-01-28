@@ -19,6 +19,9 @@ public:
     Profesor();
     Profesor(string nombre, int id);
     ~Profesor();
+    bool asignarCurso(Curso *curso);
+    bool desasignarCurso(int cod);
+    void asignarNota(Estudiante *estudiante);
     string toString();
 };
 

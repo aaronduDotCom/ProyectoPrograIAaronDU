@@ -31,6 +31,7 @@ public:
     string getNombre();
     int getDia();
     int getHora();
+    Profesor* getProfesorAsignado();
 
     string toString();
 };

@@ -16,6 +16,15 @@ Estudiante::~Estudiante() {
     delete horario;
 }
 
+bool Estudiante::matricularCurso(Curso *curso) {
+    horario->matricularCurso(curso);
+    return horario->matricularCurso(curso);
+}
+
+bool Estudiante::desmatricularCurso(int cod) {
+}
+
+
 string Estudiante::toString() {
     stringstream ss;
     ss << Persona::toString();

@@ -38,6 +38,15 @@ bool Horario::vacia() {
     return result;
 }
 
+bool Horario::franjaLlena(int franja) {
+    for (int i=0; i<DIAS; i++) {
+        if (*(*(m+i)+franja)!=nullptr) {
+            return false;
+        }
+    }
+    return true;
+}
+
 Curso *Horario::buscarCurso(int codigo) {
     Curso *curso;
     for (int i=0; i<DIAS; i++) {
@@ -52,22 +61,29 @@ Curso *Horario::buscarCurso(int codigo) {
 
 //falta hacerlo segun el curso
 bool Horario::matricularCurso(Curso *curso) {
-    if (curso!=nullptr) {
+    if (curso!=nullptr && !franjaLlena(curso->getHora())) {
+
         int dia = curso->getDia();
         int franja = curso->getHora();
         if (dia>=0 && dia<DIAS && franja>=0 && franja<FRANJA) {
             *(*(m+dia)+franja) = curso;
             return true;
         }
+
     }
 
     return false;
 }
 
-bool Horario::desmatricularCurso(int dia, int franja) {
-    if (dia>=0 && dia<DIAS && franja>=0 && franja<FRANJA) {
-        *(*(m+dia)+franja) = nullptr;
-        return true;
+bool Horario::desmatricularCurso(int cod) {
+    if (buscarCurso(cod)!=nullptr && !franjaLlena(cod)) {
+        int dia = buscarCurso(cod)->getDia();
+        int franja = buscarCurso(cod)->getHora();
+
+        if (dia>=0 && dia<DIAS && franja>=0 && franja<FRANJA) {
+            *(*(m+dia)+franja) = nullptr;
+            return true;
+        }
     }
     return false;
 }

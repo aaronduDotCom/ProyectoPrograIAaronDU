@@ -20,7 +20,7 @@ public:
     bool eliminarPrimero();
     bool eliminarUltimo();
     bool eliminar(int id);
-    Estudiante *buscar(int id);
+    Curso *buscar(int id);
 };
 
 

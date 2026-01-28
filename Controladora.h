@@ -5,8 +5,10 @@
 #ifndef PROYECTOPROGRAIAARONDU_CONTROLADORA_H
 #define PROYECTOPROGRAIAARONDU_CONTROLADORA_H
 
+#include "UniversidadAlbertoMagno.h"
 
 class Controladora {
+public:
 };
 
 

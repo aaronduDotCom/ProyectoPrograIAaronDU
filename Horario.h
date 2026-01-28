@@ -22,9 +22,10 @@ public:
     ~Horario();
 
     bool vacia();
+    bool franjaLlena(int franja);
     Curso *buscarCurso(int codigo);
-    bool matricularCurso(Curso*otrCcurso);
-    bool desmatricularCurso(int dia,int franja);
+    bool matricularCurso(Curso*otroCurso);
+    bool desmatricularCurso(int cod);
 
     string toString();
 };
