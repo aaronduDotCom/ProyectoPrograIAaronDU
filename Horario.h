@@ -21,11 +21,11 @@ public:
     Horario();
     ~Horario();
 
+    void setCurso(Curso *curso);
+
     bool vacia();
-    bool franjaLlena(int franja);
+    bool franjaVacia(int franja);
     Curso *buscarCurso(int codigo);
-    bool matricularCurso(Curso*otroCurso);
-    bool desmatricularCurso(int cod);
 
     string toString();
 };

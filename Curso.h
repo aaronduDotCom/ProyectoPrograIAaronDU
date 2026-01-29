@@ -20,18 +20,24 @@ private:
     int hora; //8am-7pm
     Profesor *profesorAsignado;
     ListaEstudiantes *listaEstudiantes;
+    int cantidadEstudiantes;
     int limiteCupos;
 public:
-    Curso(int codigo, string nombre, int dia, int hora, Profesor profesor, int limiteCupos);
+    Curso(int codigo, string nombre, int dia, int hora, Profesor *profesor, int limiteCupos);
     ~Curso();
-    bool agregarEstudiante();
-    bool eliminarEstudiante();
+
+    Profesor* getProfesorAsignado();
+    ListaEstudiantes* getListaEstudiantes();
+
+    bool agregarEstudiante(Estudiante* estudiante);
+    bool eliminarEstudiante(Estudiante* estudiante);
 
     int getCodigo();
     string getNombre();
     int getDia();
     int getHora();
-    Profesor* getProfesorAsignado();
+
+    void setProfesorAsignado(Profesor *profesor);
 
     string toString();
 };

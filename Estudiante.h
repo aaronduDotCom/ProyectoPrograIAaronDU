@@ -14,15 +14,18 @@ using namespace std;
 
 class Estudiante:public Persona {
 private:
-    double calificacionGlobal();
+    double calificacionGlobal;
     Horario* horario;
 public:
     Estudiante();
     Estudiante(string nombre, int id);
-    ~Estudiante();
-    bool matricularCurso(Curso *curso);
+    ~Estudiante() override;
+
+    void setCalificacionGlobal(double calificacionGlobal);
+
+    bool matricularCurso(int cod);
     bool desmatricularCurso(int cod);
-    string toString();
+    string toString() override;
 };
 
 

@@ -18,11 +18,14 @@ private:
 public:
     Profesor();
     Profesor(string nombre, int id);
-    ~Profesor();
-    bool asignarCurso(Curso *curso);
+    ~Profesor() override;
+
+    bool asignarCurso(int cod);
     bool desasignarCurso(int cod);
-    void asignarNota(Estudiante *estudiante);
-    string toString();
+
+    void asignarNota(int codCur, int codEst, int nuevaNota);
+
+    string toString() override;
 };
 
 

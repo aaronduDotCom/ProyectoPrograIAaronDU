@@ -16,13 +16,23 @@ Profesor::~Profesor() {
     delete horario;
 }
 
-bool Profesor::asignarCurso(Curso *curso) {
+bool Profesor::asignarCurso(int cod) {
+    Curso* aux = horario->buscarCurso(cod);
+    if (aux != nullptr)
+        return aux->setProfesorAsignado(this);
+    return false;
+
 }
 
 bool Profesor::desasignarCurso(int cod) {
+    Curso* aux = horario->buscarCurso(cod);
+    if (aux != nullptr)
+        return aux->setProfesorAsignado(nullptr);
+    return false;
 }
 
-void Profesor::asignarNota(Estudiante *estudiante) {
+void Profesor::asignarNota(int codCur, int codEst, int nuevaNota) {
+    horario->buscarCurso(codCur)->getListaEstudiantes()->buscar(codEst)->setCalificacionGlobal(nuevaNota);
 }
 
 string Profesor::toString() {
