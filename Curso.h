@@ -7,6 +7,9 @@
 
 #include "Profesor.h"
 #include "ListaEstudiantes.h"
+class ListaEstudiantes;
+class Estudiante;
+class Profesor;
 
 #include <string>
 #include <sstream>

@@ -72,7 +72,12 @@ string Horario::toString() {
     stringstream ss;
     for (int i=0; i<DIAS; i++) {
         for (int j=0; j<FRANJA; j++) {
-            ss<<" | "<<(*(*(m+i)+j))->getNombre();
+            if ((*(*(m+i)+j))!=nullptr) {
+                ss<<" | "<<(*(*(m+i)+j))->getNombre();
+            }else {
+                ss<<"\t\t";
+            }
+
         }
         ss<<" | "<<endl;
     }

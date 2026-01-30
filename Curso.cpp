@@ -38,7 +38,10 @@ bool Curso::agregarEstudiante(Estudiante*estudiante) {
 }
 
 bool Curso::eliminarEstudiante(Estudiante*estudiante) {
-    listaEstudiantes->
+    if (listaEstudiantes->eliminar(estudiante->getId())) {
+        return true;
+    }
+    return false;
 }
 
 int Curso::getCodigo() {return codigo;}

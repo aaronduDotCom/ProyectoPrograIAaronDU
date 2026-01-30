@@ -15,6 +15,8 @@ public:
     ListaCursos();
     ~ListaCursos();
 
+    NodoCursos *getPrimero();
+
     bool vacia();
     void agregarPrimero(Curso*curso);
     bool eliminarPrimero();

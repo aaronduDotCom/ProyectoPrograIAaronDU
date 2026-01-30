@@ -15,6 +15,8 @@ ListaCursos::~ListaCursos() {
     }
 }
 
+NodoCursos * ListaCursos::getPrimero() {return primero;}
+
 bool ListaCursos::vacia() {
     return primero==nullptr;
 }

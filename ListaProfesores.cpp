@@ -15,6 +15,8 @@ ListaProfesores::~ListaProfesores() {
     }
 }
 
+NodoProfesores * ListaProfesores::getPrimero() {return primero;}
+
 bool ListaProfesores::vacia() {
     return primero==nullptr;
 }

@@ -21,6 +21,10 @@ public:
     ListaEstudiantes *getListaEstudiantes();
     ListaProfesores *getListaProfesores();
     ListaCursos *getListaCursos();
+
+    void eliminarEstudiantes();
+    void eliminarProfesores();
+    void eliminarCursos();
 };
 
 

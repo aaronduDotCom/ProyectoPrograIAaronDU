@@ -6,6 +6,7 @@
 #define PROYECTOPROGRAIAARONDU_HORARIO_H
 
 #include "Curso.h"
+class Curso;
 
 #include <string>
 #include <sstream>

@@ -15,6 +15,8 @@ public:
     ListaProfesores();
     ~ListaProfesores();
 
+    NodoProfesores *getPrimero();
+
     bool vacia();
     void agregarPrimero(Profesor *profesor);
     bool eliminarPrimero();

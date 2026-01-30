@@ -5,10 +5,16 @@
 #ifndef PROYECTOPROGRAIAARONDU_INTERFAZ_H
 #define PROYECTOPROGRAIAARONDU_INTERFAZ_H
 
-#include "Controladora.h"
+#include <iostream>
+
+#include "UniversidadAlbertoMagno.h"
+class Controladora;
 
 class Interfaz {
+private:
+    UniversidadAlbertoMagno *u;
 public:
+    Interfaz();
     void ejecutarInterfaz();
 };
 

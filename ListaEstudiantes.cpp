@@ -15,6 +15,8 @@ ListaEstudiantes::~ListaEstudiantes() {
     }
 }
 
+NodoEstudiantes * ListaEstudiantes::getPrimero() {return primero;}
+
 bool ListaEstudiantes::vacia() {
     return primero==nullptr;
 }
@@ -113,3 +115,4 @@ Estudiante * ListaEstudiantes::buscar(int id) {
 
     return nullptr;
 }
+

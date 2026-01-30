@@ -6,6 +6,8 @@
 #define PROYECTOPROGRAIAARONDU_LISTAESTUDIANTES_H
 
 #include "NodoEstudiantes.h"
+class NodoEstudiantes;
+class Estudiante;
 
 class ListaEstudiantes {
 private:
@@ -15,12 +17,15 @@ public:
     ListaEstudiantes();
     ~ListaEstudiantes();
 
+    NodoEstudiantes *getPrimero();
+
     bool vacia();
     void agregarPrimero(Estudiante*estudiante);
     bool eliminarPrimero();
     bool eliminarUltimo();
     bool eliminar(int id);
     Estudiante *buscar(int id);
+
 };
 
 

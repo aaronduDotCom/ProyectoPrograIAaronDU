@@ -6,6 +6,7 @@
 #define PROYECTOPROGRAIAARONDU_NODOESTUDIANTES_H
 
 #include "Estudiante.h"
+class Estudiante;
 
 class NodoEstudiantes {
 private:

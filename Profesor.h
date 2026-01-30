@@ -7,6 +7,7 @@
 
 #include "Persona.h"
 #include "Horario.h"
+class Horario;
 
 #include <string>
 #include <sstream>

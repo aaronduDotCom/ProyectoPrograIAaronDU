@@ -18,16 +18,20 @@ Profesor::~Profesor() {
 
 bool Profesor::asignarCurso(int cod) {
     Curso* aux = horario->buscarCurso(cod);
-    if (aux != nullptr)
-        return aux->setProfesorAsignado(this);
+    if (aux != nullptr) {
+        aux->setProfesorAsignado(this);
+        return true;
+    }
     return false;
 
 }
 
 bool Profesor::desasignarCurso(int cod) {
     Curso* aux = horario->buscarCurso(cod);
-    if (aux != nullptr)
-        return aux->setProfesorAsignado(nullptr);
+    if (aux != nullptr) {
+        aux->setProfesorAsignado(nullptr);
+        return true;
+    }
     return false;
 }
 
