@@ -14,7 +14,7 @@ public:
 
     bool registrarEstudiante(UniversidadAlbertoMagno*u,string nombre,int id);
     bool registrarProfesores(UniversidadAlbertoMagno*u,string nombre,int id);
-    bool registrarCursos(UniversidadAlbertoMagno*u,int id,string nombre,int dia, int hora, Profesor*profesor,int limiteCupos);
+    bool registrarCursos(UniversidadAlbertoMagno*u,int id,string nombre,int dia, int hora,int idProfesor,int limiteCupos);
 
     bool expulsarEstudiante(UniversidadAlbertoMagno*u,int id);
     bool despedirProfesor(UniversidadAlbertoMagno*u,int id);

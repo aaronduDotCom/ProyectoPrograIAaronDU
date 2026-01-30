@@ -20,6 +20,9 @@ string Profesor::getTipo() {
     return "Estudiantes";
 }
 
+void Profesor::setCalificacionGlobal(double) {
+}
+
 bool Profesor::asignarCurso(int cod) {
     Curso* aux = horario->buscarCurso(cod);
     if (aux != nullptr) {

@@ -23,6 +23,8 @@ public:
 
     string getTipo();
 
+    void setCalificacionGlobal(double) override;
+
     bool asignarCurso(int cod);
     bool desasignarCurso(int cod);
 

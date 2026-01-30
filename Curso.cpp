@@ -8,7 +8,7 @@ Curso::Curso(int codigo,
     string nombre,
     int dia,
     int hora,
-    Profesor *profesor,
+    Persona *profesor,
     int limiteCupos)
 {
     this->codigo = codigo;
@@ -24,7 +24,7 @@ Curso::Curso(int codigo,
 Curso::~Curso() {
 }
 
-Profesor * Curso::getProfesorAsignado() {return this->profesorAsignado;}
+Persona * Curso::getProfesorAsignado() {return this->profesorAsignado;}
 
 ListaPersonas * Curso::getListaEstudiantes() {return this->listaEstudiantes;}
 

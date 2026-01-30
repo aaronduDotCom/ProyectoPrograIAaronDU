@@ -23,6 +23,8 @@ public:
     int getId();
     void setId(int id);
 
+    virtual void setCalificacionGlobal(double) = 0;
+
     virtual string toString();
 };
 

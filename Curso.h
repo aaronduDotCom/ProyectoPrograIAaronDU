@@ -21,15 +21,15 @@ private:
     string nombre;
     int dia; //1-7 domingo a lunes
     int hora; //8am-7pm
-    Profesor *profesorAsignado;
+    Persona *profesorAsignado;
     ListaPersonas *listaEstudiantes;
     int cantidadEstudiantes;
     int limiteCupos;
 public:
-    Curso(int codigo, string nombre, int dia, int hora, Profesor *profesor, int limiteCupos);
+    Curso(int codigo, string nombre, int dia, int hora, Persona *profesor, int limiteCupos);
     ~Curso();
 
-    Profesor* getProfesorAsignado();
+    Persona* getProfesorAsignado();
     ListaPersonas* getListaEstudiantes();
 
     bool agregarEstudiante(Persona* estudiante);

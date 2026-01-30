@@ -24,7 +24,7 @@ public:
 
     string getTipo();
 
-    void setCalificacionGlobal(double calificacionGlobal);
+    void setCalificacionGlobal(double calificacionGlobal) override;
 
     bool matricularCurso(int cod);
     bool desmatricularCurso(int cod);

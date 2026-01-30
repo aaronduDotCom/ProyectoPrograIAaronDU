@@ -8,6 +8,11 @@
 
 bool Controladora::registrarEstudiante(UniversidadAlbertoMagno *u, string nombre, int id) {
     Persona* estudiante=new Estudiante(nombre,id);
+
+    if (estudiante==nullptr) {
+        return false;
+    }
+
     u->getListaEstudiantes()->agregarPrimero(estudiante);
 
     if (u->getListaEstudiantes()->buscar(id)!=nullptr) {
@@ -20,6 +25,11 @@ bool Controladora::registrarEstudiante(UniversidadAlbertoMagno *u, string nombre
 
 bool Controladora::registrarProfesores(UniversidadAlbertoMagno *u, string nombre, int id) {
     Persona* profesor=new Profesor(nombre,id);
+
+    if (profesor==nullptr) {
+        return false;
+    }
+
     u->getListaProfesores()->agregarPrimero(profesor);
 
     if (u->getListaProfesores()->buscar(id)!=nullptr) {
@@ -30,11 +40,33 @@ bool Controladora::registrarProfesores(UniversidadAlbertoMagno *u, string nombre
     }
 }
 
-bool Controladora::registrarCursos(UniversidadAlbertoMagno *u, int id, string nombre, int dia, int hora,
-    Profesor *profesor, int limiteCupos) {
+bool Controladora::registrarCursos(UniversidadAlbertoMagno *u, int id, string nombre, int dia, int hora,int idProfesor, int limiteCupos) {
+    Persona*aux = u->getListaProfesores()->buscar(idProfesor);
+
+    if (aux==nullptr) {
+        return false;
+    }
+
+    Curso* curso=new Curso(id, nombre, dia, hora, aux, limiteCupos);
+    u->getListaCursos()->agregarPrimero(curso);
+
+    if (u->getListaCursos()->buscar(id)!=nullptr) {
+        return true;
+    }else {
+        delete curso;
+        return false;
+    }
 }
 
 bool Controladora::expulsarEstudiante(UniversidadAlbertoMagno *u, int id) {
+    Persona*aux = u->getListaEstudiantes()->buscar(id);
+
+    if (aux==nullptr) {
+        return false;
+    }
+
+
+
 }
 
 bool Controladora::despedirProfesor(UniversidadAlbertoMagno *u, int id) {
