@@ -22,6 +22,8 @@ public:
     Estudiante(string nombre, int id);
     ~Estudiante() override;
 
+    string getTipo();
+
     void setCalificacionGlobal(double calificacionGlobal);
 
     bool matricularCurso(int cod);

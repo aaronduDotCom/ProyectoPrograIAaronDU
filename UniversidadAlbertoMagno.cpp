@@ -5,8 +5,8 @@
 #include "UniversidadAlbertoMagno.h"
 
 UniversidadAlbertoMagno::UniversidadAlbertoMagno() {
-    listaEstudiantes= new ListaEstudiantes;
-    listaProfesores= new ListaProfesores;
+    listaEstudiantes= new ListaPersonas;
+    listaProfesores= new ListaPersonas;
     listaCursos= new ListaCursos;
 }
 
@@ -16,11 +16,11 @@ UniversidadAlbertoMagno::~UniversidadAlbertoMagno() {
     eliminarCursos();
 }
 
-ListaEstudiantes * UniversidadAlbertoMagno::getListaEstudiantes() {
+ListaPersonas * UniversidadAlbertoMagno::getListaEstudiantes() {
     return listaEstudiantes;
 }
 
-ListaProfesores * UniversidadAlbertoMagno::getListaProfesores() {
+ListaPersonas * UniversidadAlbertoMagno::getListaProfesores() {
     return listaProfesores;
 }
 
@@ -30,7 +30,7 @@ ListaCursos * UniversidadAlbertoMagno::getListaCursos() {
 
 void UniversidadAlbertoMagno::eliminarEstudiantes() {
     while (!listaEstudiantes->vacia()) {
-        Estudiante* e= listaEstudiantes->getPrimero()->getEstudiante();
+        Persona* e= listaEstudiantes->getPrimero()->getPersona();
         listaEstudiantes->eliminarPrimero();
         delete e;
     }
@@ -38,7 +38,7 @@ void UniversidadAlbertoMagno::eliminarEstudiantes() {
 
 void UniversidadAlbertoMagno::eliminarProfesores() {
     while (!listaProfesores->vacia()) {
-        Profesor* p= listaProfesores->getPrimero()->getProfesor();
+        Persona* p= listaProfesores->getPrimero()->getPersona();
         listaProfesores->eliminarPrimero();
         delete p;
     }

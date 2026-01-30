@@ -6,8 +6,8 @@
 #define PROYECTOPROGRAIAARONDU_CURSO_H
 
 #include "Profesor.h"
-#include "ListaEstudiantes.h"
-class ListaEstudiantes;
+#include "ListaPersonas.h"
+class ListaPersonas;
 class Estudiante;
 class Profesor;
 
@@ -22,7 +22,7 @@ private:
     int dia; //1-7 domingo a lunes
     int hora; //8am-7pm
     Profesor *profesorAsignado;
-    ListaEstudiantes *listaEstudiantes;
+    ListaPersonas *listaEstudiantes;
     int cantidadEstudiantes;
     int limiteCupos;
 public:
@@ -30,10 +30,10 @@ public:
     ~Curso();
 
     Profesor* getProfesorAsignado();
-    ListaEstudiantes* getListaEstudiantes();
+    ListaPersonas* getListaEstudiantes();
 
-    bool agregarEstudiante(Estudiante* estudiante);
-    bool eliminarEstudiante(Estudiante* estudiante);
+    bool agregarEstudiante(Persona* estudiante);
+    bool eliminarEstudiante(Persona* estudiante);
 
     int getCodigo();
     string getNombre();

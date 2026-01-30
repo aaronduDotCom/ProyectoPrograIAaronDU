@@ -2,6 +2,8 @@
 // Created by Oscar on 27/1/2026.
 //
 
+#include "Estudiante.h"
+#include "Profesor.h"
 #include "Controladora.h"
 
 bool Controladora::registrarEstudiante(UniversidadAlbertoMagno *u, string nombre, int id) {
@@ -18,9 +20,9 @@ bool Controladora::registrarEstudiante(UniversidadAlbertoMagno *u, string nombre
 
 bool Controladora::registrarProfesores(UniversidadAlbertoMagno *u, string nombre, int id) {
     Persona* profesor=new Profesor(nombre,id);
-    u->getListaEstudiantes()->agregarPrimero(profesor);
+    u->getListaProfesores()->agregarPrimero(profesor);
 
-    if (u->getListaEstudiantes()->buscar(id)!=nullptr) {
+    if (u->getListaProfesores()->buscar(id)!=nullptr) {
         return true;
     }else {
         delete profesor;

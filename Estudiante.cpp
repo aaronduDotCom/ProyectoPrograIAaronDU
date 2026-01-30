@@ -18,6 +18,11 @@ Estudiante::~Estudiante() {
     delete horario;
 }
 
+string Estudiante::getTipo() {
+    return "Estudiantes";
+}
+
+
 void Estudiante::setCalificacionGlobal(double calificacionGlobal) {this->calificacionGlobal = calificacionGlobal;}
 
 bool Estudiante::matricularCurso(int cod) {

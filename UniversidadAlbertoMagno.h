@@ -5,21 +5,20 @@
 #ifndef PROYECTOPROGRAIAARONDU_UNIVERSIDADALBERTOMAGNO_H
 #define PROYECTOPROGRAIAARONDU_UNIVERSIDADALBERTOMAGNO_H
 
-#include "ListaEstudiantes.h"
-#include "ListaProfesores.h"
+#include "ListaPersonas.h"
 #include "ListaCursos.h"
 
 class UniversidadAlbertoMagno {
 private:
-    ListaEstudiantes *listaEstudiantes;
-    ListaProfesores *listaProfesores;
+    ListaPersonas *listaEstudiantes;
+    ListaPersonas *listaProfesores;
     ListaCursos *listaCursos;
 public:
     UniversidadAlbertoMagno();
     ~UniversidadAlbertoMagno();
 
-    ListaEstudiantes *getListaEstudiantes();
-    ListaProfesores *getListaProfesores();
+    ListaPersonas *getListaEstudiantes();
+    ListaPersonas *getListaProfesores();
     ListaCursos *getListaCursos();
 
     void eliminarEstudiantes();

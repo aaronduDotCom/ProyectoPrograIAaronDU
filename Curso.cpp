@@ -16,7 +16,7 @@ Curso::Curso(int codigo,
     this->dia = dia;
     this->hora = hora;
     this->profesorAsignado = profesor;
-    this->listaEstudiantes = new ListaEstudiantes();
+    this->listaEstudiantes = new ListaPersonas();
     this->limiteCupos = limiteCupos;
     this->cantidadEstudiantes = 0;
 }
@@ -26,9 +26,9 @@ Curso::~Curso() {
 
 Profesor * Curso::getProfesorAsignado() {return this->profesorAsignado;}
 
-ListaEstudiantes * Curso::getListaEstudiantes() {return this->listaEstudiantes;}
+ListaPersonas * Curso::getListaEstudiantes() {return this->listaEstudiantes;}
 
-bool Curso::agregarEstudiante(Estudiante*estudiante) {
+bool Curso::agregarEstudiante(Persona*estudiante) {
     if (limiteCupos && estudiante!=nullptr) {
         listaEstudiantes->agregarPrimero(estudiante);
         cantidadEstudiantes++;
@@ -37,7 +37,7 @@ bool Curso::agregarEstudiante(Estudiante*estudiante) {
     return false;
 }
 
-bool Curso::eliminarEstudiante(Estudiante*estudiante) {
+bool Curso::eliminarEstudiante(Persona*estudiante) {
     if (listaEstudiantes->eliminar(estudiante->getId())) {
         return true;
     }

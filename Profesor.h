@@ -21,6 +21,8 @@ public:
     Profesor(string nombre, int id);
     ~Profesor() override;
 
+    string getTipo();
+
     bool asignarCurso(int cod);
     bool desasignarCurso(int cod);
 

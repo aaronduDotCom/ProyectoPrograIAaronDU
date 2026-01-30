@@ -16,6 +16,10 @@ Profesor::~Profesor() {
     delete horario;
 }
 
+string Profesor::getTipo() {
+    return "Estudiantes";
+}
+
 bool Profesor::asignarCurso(int cod) {
     Curso* aux = horario->buscarCurso(cod);
     if (aux != nullptr) {

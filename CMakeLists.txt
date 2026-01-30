@@ -31,4 +31,8 @@ add_executable(ProyectoPrograIAaronDU main.cpp
         ListaProfesores.cpp
         ListaProfesores.h
         ListaCursos.cpp
-        ListaCursos.h)
+        ListaCursos.h
+        ListaPersonas.cpp
+        ListaPersonas.h
+        NodoPersonas.cpp
+        NodoPersonas.h)
