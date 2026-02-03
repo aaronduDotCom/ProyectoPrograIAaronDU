@@ -5,6 +5,9 @@
 #ifndef PROYECTOPROGRAIAARONDU_PERSONA_H
 #define PROYECTOPROGRAIAARONDU_PERSONA_H
 
+#include "Horario.h"
+class Horario;
+
 #include <string>
 #include <sstream>
 using namespace std;
@@ -23,7 +26,12 @@ public:
     int getId();
     void setId(int id);
 
+    virtual double getCalificacionGlobal() = 0;
     virtual void setCalificacionGlobal(double) = 0;
+    virtual Horario* getHorario() = 0;
+
+    virtual bool matricularCurso(Curso*curso) = 0;
+    virtual bool desmatricularCurso(int cod) = 0;
 
     virtual string toString();
 };

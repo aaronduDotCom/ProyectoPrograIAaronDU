@@ -23,6 +23,8 @@ public:
     bool eliminarUltimo();
     bool eliminar(int id);
     Curso *buscar(int id);
+
+    string toString();
 };
 
 

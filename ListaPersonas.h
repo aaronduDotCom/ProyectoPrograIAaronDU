@@ -6,6 +6,13 @@
 #define PROYECTOPROGRAIAARONDU_LISTAPERSONAS_H
 
 #include "NodoPersonas.h"
+#include <sstream>
+#include <string>
+
+using namespace std;
+
+class NodoPersonas;
+class Persona;
 
 class ListaPersonas {
 private:
@@ -23,6 +30,8 @@ public:
     bool eliminarUltimo();
     bool eliminar(int id);
     Persona *buscar(int id);
+
+    string toString();
 };
 
 

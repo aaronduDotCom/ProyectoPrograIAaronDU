@@ -6,6 +6,7 @@
 #define PROYECTOPROGRAIAARONDU_NODOPERSONAS_H
 
 #include "Persona.h"
+class Persona;
 
 class NodoPersonas {
 private:

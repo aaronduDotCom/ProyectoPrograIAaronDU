@@ -114,3 +114,15 @@ Persona * ListaPersonas::buscar(int id) {
 
     return nullptr;
 }
+
+string ListaPersonas::toString() {
+    stringstream resultado;
+    actual = primero;
+
+    while (actual != nullptr) {
+        resultado << actual->getPersona()->toString() << "\n";
+        actual = actual->getSig();
+    }
+
+    return resultado.str();
+}

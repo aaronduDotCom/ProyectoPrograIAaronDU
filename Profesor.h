@@ -21,9 +21,12 @@ public:
     Profesor(string nombre, int id);
     ~Profesor() override;
 
-    string getTipo();
-
+    double getCalificacionGlobal() override;
     void setCalificacionGlobal(double) override;
+    Horario *getHorario() override;
+
+    bool matricularCurso(Curso*curso) override;
+    bool desmatricularCurso(int cod) override;
 
     bool asignarCurso(int cod);
     bool desasignarCurso(int cod);
@@ -31,6 +34,8 @@ public:
     void asignarNota(int codCur, int codEst, int nuevaNota);
 
     string toString() override;
+
+    double calcularPromedio();
 };
 
 

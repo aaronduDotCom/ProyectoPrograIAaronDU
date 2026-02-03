@@ -5,11 +5,12 @@
 #ifndef PROYECTOPROGRAIAARONDU_CURSO_H
 #define PROYECTOPROGRAIAARONDU_CURSO_H
 
-#include "Profesor.h"
+#include "Persona.h"
 #include "ListaPersonas.h"
+#include "NodoPersonas.h"
+
 class ListaPersonas;
-class Estudiante;
-class Profesor;
+class Persona;
 
 #include <string>
 #include <sstream>
@@ -40,9 +41,11 @@ public:
     int getDia();
     int getHora();
 
-    void setProfesorAsignado(Profesor *profesor);
+    void setProfesorAsignado(Persona *profesor);
 
     string toString();
+
+    double calcularPromedio();
 };
 
 

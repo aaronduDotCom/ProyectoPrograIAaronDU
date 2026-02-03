@@ -52,10 +52,29 @@ int Curso::getDia() {return dia;}
 
 int Curso::getHora() {return hora;}
 
-void Curso::setProfesorAsignado(Profesor *profesor) {this->profesorAsignado = profesor;}
+void Curso::setProfesorAsignado(Persona *profesor) {this->profesorAsignado = profesor;}
 
 string Curso::toString() {
     stringstream ss;
-    ss<<nombre<<endl<<codigo<<profesorAsignado->getNombre();
+    ss<<nombre<<endl<<codigo<<profesorAsignado->getNombre()<<"\n\n";
     return ss.str();
 }
+
+double Curso::calcularPromedio() {
+    double suma = 0;
+    int cantidad = 0;
+
+    NodoPersonas* actual = listaEstudiantes->getPrimero();
+    while (actual != nullptr) {
+        suma += actual->getPersona()->getCalificacionGlobal();
+        cantidad++;
+        actual = actual->getSig();
+    }
+
+    if (cantidad == 0) {
+        return 0;
+    }
+
+    return suma / cantidad;
+}
+

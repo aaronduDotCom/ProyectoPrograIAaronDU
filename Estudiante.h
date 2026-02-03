@@ -22,12 +22,12 @@ public:
     Estudiante(string nombre, int id);
     ~Estudiante() override;
 
-    string getTipo();
-
+    double getCalificacionGlobal() override;
     void setCalificacionGlobal(double calificacionGlobal) override;
+    Horario *getHorario() override;
 
-    bool matricularCurso(int cod);
-    bool desmatricularCurso(int cod);
+    bool matricularCurso(Curso*curso) override;
+    bool desmatricularCurso(int cod) override;
     string toString() override;
 };
 

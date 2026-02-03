@@ -115,3 +115,15 @@ Curso * ListaCursos::buscar(int id) {
 
     return nullptr;
 }
+
+string ListaCursos::toString() {
+    stringstream resultado;
+    actual = primero;
+
+    while (actual != nullptr) {
+        resultado << actual->getCurso()->toString() << "\n";
+        actual = actual->getSig();
+    }
+
+    return resultado.str();
+}

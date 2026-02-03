@@ -18,20 +18,20 @@ Estudiante::~Estudiante() {
     delete horario;
 }
 
-string Estudiante::getTipo() {
-    return "Estudiantes";
-}
+double Estudiante::getCalificacionGlobal() {return calificacionGlobal;}
 
 void Estudiante::setCalificacionGlobal(double calificacionGlobal) {this->calificacionGlobal = calificacionGlobal;}
 
-bool Estudiante::matricularCurso(int cod) {
+Horario *Estudiante::getHorario() {return horario;}
 
-    Curso*aux=horario->buscarCurso(cod);
+bool Estudiante::matricularCurso(Curso*curso) {
+
+    Curso*aux=horario->buscarCurso(curso->getCodigo());
 
     if(aux!=nullptr && horario->franjaVacia(aux->getHora())) {
 
         if (aux->agregarEstudiante(this)) {
-            horario->setCurso(aux);
+            horario->setCurso(curso);
             return true;
         }
     }

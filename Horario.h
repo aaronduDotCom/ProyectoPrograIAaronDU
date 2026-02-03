@@ -22,6 +22,7 @@ public:
     Horario();
     ~Horario();
 
+    Curso* getCurso(int x,int y);
     void setCurso(Curso *curso);
 
     bool vacia();

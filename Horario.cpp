@@ -24,6 +24,11 @@ Horario::~Horario() {
     m=nullptr;
 }
 
+Curso * Horario::getCurso(int x,int y) {
+    if (x >= 0 && x < DIAS && y >= 0 && y < FRANJA) {return *(*(m+x)+y);}
+    return nullptr;
+}
+
 void Horario::setCurso(Curso *curso) {
     if (curso == nullptr) return;
 

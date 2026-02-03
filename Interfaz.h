@@ -8,6 +8,7 @@
 #include <iostream>
 
 #include "UniversidadAlbertoMagno.h"
+
 class Controladora;
 
 class Interfaz {

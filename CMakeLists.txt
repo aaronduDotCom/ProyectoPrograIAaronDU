@@ -20,19 +20,13 @@ add_executable(ProyectoPrograIAaronDU main.cpp
         Estudiante.h
         Profesor.cpp
         Profesor.h
-        NodoEstudiantes.cpp
-        NodoEstudiantes.h
-        NodoProfesores.cpp
-        NodoProfesores.h
         NodoCursos.cpp
         NodoCursos.h
-        ListaEstudiantes.cpp
-        ListaEstudiantes.h
-        ListaProfesores.cpp
-        ListaProfesores.h
         ListaCursos.cpp
         ListaCursos.h
         ListaPersonas.cpp
         ListaPersonas.h
         NodoPersonas.cpp
-        NodoPersonas.h)
+        NodoPersonas.h
+        Administrativo.cpp
+        Administrativo.h)
