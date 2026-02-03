@@ -48,7 +48,7 @@ void Interfaz::ejecutarInterfaz(Controladora*c) {
                     <<"2.Mostrar todos los profesores\n"
                     <<"3.Mostrar todos los cursos\n"
                     <<"0.Salir de la opcion\n";
-                cin>>opcion;
+                cin>>opcionSubmenu1;
                 switch (opcionSubmenu1) {
                     case 1: {
                         cout<<"Mostrar todos los estudiantes\n";

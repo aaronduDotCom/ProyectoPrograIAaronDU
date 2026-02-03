@@ -123,7 +123,7 @@ string ListaPersonas::toString() {
     stringstream resultado;
 
     actual = primero;
-    while (actual->getSig() != nullptr) {
+    while (actual!= nullptr) {
         resultado << actual->getPersona()->toString() << "\n";
         actual = actual->getSig();
     }
