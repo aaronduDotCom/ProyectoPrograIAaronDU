@@ -10,17 +10,15 @@ class Persona;
 
 class NodoPersonas {
 private:
-    NodoPersonas *sig;
     Persona* persona;
+    NodoPersonas* sig;
 public:
-    NodoPersonas();
-    NodoPersonas(NodoPersonas *sig,Persona *persona);
-    ~NodoPersonas();
-    NodoPersonas *getSig();
-    void setSig(NodoPersonas *sig);
-    Persona *getPersona();
-    void setPersona(Persona *persona);
+    NodoPersonas(Persona* persona, NodoPersonas* sig);
+    Persona* getPersona();
+    NodoPersonas* getSig();
+    void setSig(NodoPersonas* sig);
 };
+
 
 
 #endif //PROYECTOPROGRAIAARONDU_NODOPERSONAS_H

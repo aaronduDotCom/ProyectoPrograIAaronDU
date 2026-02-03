@@ -25,7 +25,7 @@ public:
     NodoPersonas *getPrimero();
 
     bool vacia();
-    void agregarPrimero(Persona*estudiante);
+    bool agregarPrimero(Persona*estudiante);
     bool eliminarPrimero();
     bool eliminarUltimo();
     bool eliminar(int id);

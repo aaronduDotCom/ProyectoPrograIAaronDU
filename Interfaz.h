@@ -13,10 +13,11 @@ class Controladora;
 
 class Interfaz {
 private:
-    UniversidadAlbertoMagno *u;
+    UniversidadAlbertoMagno *ualma;
 public:
     Interfaz();
-    void ejecutarInterfaz();
+    ~Interfaz();
+    void ejecutarInterfaz(Controladora *c);
 };
 
 

@@ -59,7 +59,6 @@ void Profesor::asignarNota(int codCur, int codEst, int nuevaNota) {
 string Profesor::toString() {
     stringstream ss;
     ss << Persona::toString();
-    ss << horario->toString() << endl;
     return ss.str();
 }
 

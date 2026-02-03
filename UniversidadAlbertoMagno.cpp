@@ -5,15 +5,19 @@
 #include "UniversidadAlbertoMagno.h"
 
 UniversidadAlbertoMagno::UniversidadAlbertoMagno() {
-    listaEstudiantes= new ListaPersonas;
-    listaProfesores= new ListaPersonas;
-    listaCursos= new ListaCursos;
+    listaEstudiantes = new ListaPersonas();
+    listaProfesores  = new ListaPersonas();
+    listaCursos      = new ListaCursos();
 }
 
 UniversidadAlbertoMagno::~UniversidadAlbertoMagno() {
     eliminarEstudiantes();
     eliminarProfesores();
     eliminarCursos();
+
+    delete listaEstudiantes;
+    delete listaProfesores;
+    delete listaCursos;
 }
 
 ListaPersonas * UniversidadAlbertoMagno::getListaEstudiantes() {

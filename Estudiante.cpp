@@ -9,7 +9,7 @@ Estudiante::Estudiante():Persona() {
     horario = new Horario();
 }
 
-Estudiante::Estudiante(string nombre, int id) {
+Estudiante::Estudiante(string nombre, int id):Persona(nombre,id) {
     calificacionGlobal = 0;
     horario = new Horario();
 }
@@ -56,6 +56,5 @@ bool Estudiante::desmatricularCurso(int cod) {
 string Estudiante::toString() {
     stringstream ss;
     ss << Persona::toString();
-    ss << horario->toString() << endl;
     return ss.str();
 }

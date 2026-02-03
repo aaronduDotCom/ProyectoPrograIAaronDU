@@ -21,14 +21,19 @@ bool ListaPersonas::vacia() {
     return primero==nullptr;
 }
 
-void ListaPersonas::agregarPrimero(Persona *estudiante) {
+bool ListaPersonas::agregarPrimero(Persona *estudiante) {
     if (vacia()) {
-        primero=new NodoPersonas(nullptr, estudiante);
+        primero=new NodoPersonas(estudiante, primero);
+        return true;
 
-    }else if (buscar(estudiante->getId())==nullptr) {
+    }else if (buscar(estudiante->getId()) != nullptr) {
+        return false;
+
+    }else {
         actual=primero;
-        actual->setSig(new NodoPersonas(primero, estudiante));
+        actual->setSig(new NodoPersonas(estudiante, primero));
         primero=actual;
+        return true;
     }
 }
 
@@ -99,17 +104,16 @@ bool ListaPersonas::eliminar(int id) {
     return false;
 }
 
-Persona * ListaPersonas::buscar(int id) {
-    if (primero->getPersona()->getId()==id) {
-        return primero->getPersona();
-    }
+Persona* ListaPersonas::buscar(int id) {
+    if (vacia()) return nullptr;
 
-    actual=primero;
-    while (actual->getSig()!=nullptr) {
-        if (actual->getPersona()->getId()==id) {
+    actual = primero;
+
+    while (actual != nullptr) {
+        if (actual->getPersona()->getId() == id) {
             return actual->getPersona();
         }
-        actual=actual->getSig();
+        actual = actual->getSig();
     }
 
     return nullptr;
@@ -117,9 +121,9 @@ Persona * ListaPersonas::buscar(int id) {
 
 string ListaPersonas::toString() {
     stringstream resultado;
-    actual = primero;
 
-    while (actual != nullptr) {
+    actual = primero;
+    while (actual->getSig() != nullptr) {
         resultado << actual->getPersona()->toString() << "\n";
         actual = actual->getSig();
     }
