@@ -27,7 +27,7 @@ public:
 
     bool vacia();
     bool franjaVacia(int franja);
-    Curso *buscarCurso(int codigo);
+    Curso *buscarCurso(string codigo);
 
     string toString();
 };

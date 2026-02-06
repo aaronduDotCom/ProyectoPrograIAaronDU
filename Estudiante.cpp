@@ -9,7 +9,7 @@ Estudiante::Estudiante():Persona() {
     horario = new Horario();
 }
 
-Estudiante::Estudiante(string nombre, int id):Persona(nombre,id) {
+Estudiante::Estudiante(string nombre, string id):Persona(nombre,id) {
     calificacionGlobal = 0;
     horario = new Horario();
 }
@@ -30,7 +30,7 @@ bool Estudiante::matricularCurso(Curso*curso) {
 
     if(aux!=nullptr && horario->franjaVacia(aux->getHora())) {
 
-        if (aux->agregarEstudiante(this)) {
+        if (aux->getListaEstudiantes()->agregarPrimero(this)) {
             horario->setCurso(curso);
             return true;
         }
@@ -38,13 +38,13 @@ bool Estudiante::matricularCurso(Curso*curso) {
     return false;
 }
 
-bool Estudiante::desmatricularCurso(int cod) {
+bool Estudiante::desmatricularCurso(string cod) {
 
     Curso*aux=horario->buscarCurso(cod);
 
     if(aux!=nullptr) {
 
-        if (aux->eliminarEstudiante(this)) {
+        if (aux->getListaEstudiantes()->eliminar(this->getId())) {
             horario->setCurso(nullptr);
             return true;
         }

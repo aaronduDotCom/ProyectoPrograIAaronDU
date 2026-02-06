@@ -6,27 +6,24 @@
 
 Persona::Persona() {
     nombreCompleto="";
-    identificacion=0;
+    identificacion="";
 }
 
-Persona::Persona(string nombre, int id) {
+Persona::Persona(string nombre, string id) {
     nombreCompleto=nombre;
     identificacion=id;
-}
-
-Persona::~Persona() {
 }
 
 string Persona::getNombre() {return nombreCompleto;}
 
 void Persona::setNombre(string nombre) {nombreCompleto=nombre;}
 
-int Persona::getId() {return identificacion;}
+string Persona::getId() {return identificacion;}
 
-void Persona::setId(int id) {identificacion=id;}
+void Persona::setId(string id) {identificacion=id;}
 
 string Persona::toString() {
     stringstream ss;
-    ss << nombreCompleto << " " << identificacion << endl;
+    ss << nombreCompleto << " " << identificacion << "\n";
     return ss.str();
 }

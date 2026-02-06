@@ -21,8 +21,8 @@ public:
     void agregarPrimero(Curso*curso);
     bool eliminarPrimero();
     bool eliminarUltimo();
-    bool eliminar(int id);
-    Curso *buscar(int id);
+    bool eliminar(string id);
+    Curso *buscar(string id);
 
     string toString();
 };

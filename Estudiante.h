@@ -19,7 +19,7 @@ private:
     Horario* horario;
 public:
     Estudiante();
-    Estudiante(string nombre, int id);
+    Estudiante(string nombre, string id);
     ~Estudiante() override;
 
     double getCalificacionGlobal() override;
@@ -27,7 +27,7 @@ public:
     Horario *getHorario() override;
 
     bool matricularCurso(Curso*curso) override;
-    bool desmatricularCurso(int cod) override;
+    bool desmatricularCurso(string cod) override;
     string toString() override;
 };
 

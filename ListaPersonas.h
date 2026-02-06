@@ -28,8 +28,8 @@ public:
     bool agregarPrimero(Persona*estudiante);
     bool eliminarPrimero();
     bool eliminarUltimo();
-    bool eliminar(int id);
-    Persona *buscar(int id);
+    bool eliminar(string id);
+    Persona *buscar(string id);
 
     string toString();
 };

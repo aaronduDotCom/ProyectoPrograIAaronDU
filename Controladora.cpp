@@ -7,7 +7,7 @@
 #include "Controladora.h"
 #include "UniversidadAlbertoMagno.h"
 
-bool Controladora::registrarEstudiante(UniversidadAlbertoMagno* u, string nombre, int id) {
+bool Controladora::registrarEstudiante(UniversidadAlbertoMagno* u, string nombre, string id) {
     if (u->getListaEstudiantes()->buscar(id) != nullptr) {
         return false;
     }
@@ -17,7 +17,7 @@ bool Controladora::registrarEstudiante(UniversidadAlbertoMagno* u, string nombre
     return true;
 }
 
-bool Controladora::registrarProfesores(UniversidadAlbertoMagno *u, string nombre, int id) {
+bool Controladora::registrarProfesores(UniversidadAlbertoMagno *u, string nombre, string id) {
     if (u->getListaProfesores()->buscar(id) != nullptr) {
         return false;
     }
@@ -27,7 +27,7 @@ bool Controladora::registrarProfesores(UniversidadAlbertoMagno *u, string nombre
     return true;
 }
 
-bool Controladora::registrarCursos(UniversidadAlbertoMagno *u, int id, string nombre, int dia, int hora,int idProfesor, int limiteCupos) {
+bool Controladora::registrarCursos(UniversidadAlbertoMagno *u, string id, string nombre, int dia, int hora,string idProfesor, int limiteCupos) {
     if (u->getListaProfesores()->buscar(id) != nullptr) {
         return false;
     }
@@ -38,40 +38,37 @@ bool Controladora::registrarCursos(UniversidadAlbertoMagno *u, int id, string no
     return true;
 }
 
-bool Controladora::expulsarEstudiante(UniversidadAlbertoMagno *u, int id) {
+bool Controladora::expulsarEstudiante(UniversidadAlbertoMagno *u, string id) {
     Persona* e = u->getListaEstudiantes()->buscar(id);
     if (e == nullptr) {
         return false;
     }
 
     u->getListaEstudiantes()->eliminar(id);
-    delete e;
     return true;
 }
 
-bool Controladora::despedirProfesor(UniversidadAlbertoMagno *u, int id) {
+bool Controladora::despedirProfesor(UniversidadAlbertoMagno *u, string id) {
     Persona* p = u->getListaProfesores()->buscar(id);
     if (p == nullptr) {
         return false;
     }
 
     u->getListaProfesores()->eliminar(id);
-    delete p;
     return true;
 }
 
-bool Controladora::eliminarCurso(UniversidadAlbertoMagno *u,int id) {
+bool Controladora::eliminarCurso(UniversidadAlbertoMagno *u,string id) {
     Curso* c = u->getListaCursos()->buscar(id);
     if (c == nullptr) {
         return false;
     }
 
-    u->getListaProfesores()->eliminar(id);
-    delete c;
+    u->getListaCursos()->eliminar(id);
     return true;
 }
 
-bool Controladora::reasignarProfesor(UniversidadAlbertoMagno *u, int idCurso, int idProfesor) {
+bool Controladora::reasignarProfesor(UniversidadAlbertoMagno *u, string idCurso, string idProfesor) {
     Curso *cursoAux = u->getListaCursos()->buscar(idCurso);
     Persona *profesorAux = u->getListaProfesores()->buscar(idProfesor);
 
@@ -83,7 +80,7 @@ bool Controladora::reasignarProfesor(UniversidadAlbertoMagno *u, int idCurso, in
     return true;
 }
 
-bool Controladora::matricularCurso(UniversidadAlbertoMagno *u, int idEstudiante, int idCursos) {
+bool Controladora::matricularCurso(UniversidadAlbertoMagno *u, string idEstudiante, string idCursos) {
     Persona*aux=u->getListaEstudiantes()->buscar(idEstudiante);
     Curso*aux2=u->getListaCursos()->buscar(idCursos);
 
@@ -92,7 +89,7 @@ bool Controladora::matricularCurso(UniversidadAlbertoMagno *u, int idEstudiante,
     aux->matricularCurso(aux2);
 }
 
-bool Controladora::desmatricularCurso(UniversidadAlbertoMagno *u, int idEstudiante, int idCursos) {
+bool Controladora::desmatricularCurso(UniversidadAlbertoMagno *u, string idEstudiante, string idCursos) {
     Persona*aux=u->getListaEstudiantes()->buscar(idEstudiante);
     Curso*aux2=u->getListaCursos()->buscar(idCursos);
 
@@ -101,7 +98,7 @@ bool Controladora::desmatricularCurso(UniversidadAlbertoMagno *u, int idEstudian
     aux->desmatricularCurso(aux2->getCodigo());
 }
 
-string Controladora::mostrarEstudiante(UniversidadAlbertoMagno *u, int id) {
+string Controladora::mostrarEstudiante(UniversidadAlbertoMagno *u, string id) {
     Persona*aux = u->getListaEstudiantes()->buscar(id);
 
     if (aux==nullptr) return "";
@@ -109,7 +106,7 @@ string Controladora::mostrarEstudiante(UniversidadAlbertoMagno *u, int id) {
     return aux->toString();
 }
 
-string Controladora::mostrarProfesor(UniversidadAlbertoMagno *u, int id) {
+string Controladora::mostrarProfesor(UniversidadAlbertoMagno *u, string id) {
     Persona*aux = u->getListaProfesores()->buscar(id);
 
     if (aux==nullptr) return "";
@@ -117,7 +114,7 @@ string Controladora::mostrarProfesor(UniversidadAlbertoMagno *u, int id) {
     return aux->toString();
 }
 
-string Controladora::mostrarCurso(UniversidadAlbertoMagno *u, int id) {
+string Controladora::mostrarCurso(UniversidadAlbertoMagno *u, string id) {
     Curso*aux = u->getListaCursos()->buscar(id);
 
     if (aux==nullptr) return "";
@@ -125,7 +122,7 @@ string Controladora::mostrarCurso(UniversidadAlbertoMagno *u, int id) {
     return aux->toString();
 }
 
-string Controladora::mostrarEstudiantePorCurso(UniversidadAlbertoMagno *u,int idCurso,int idEstudiante) {
+string Controladora::mostrarEstudiantePorCurso(UniversidadAlbertoMagno *u,string idCurso,string idEstudiante) {
     Curso *aux= u->getListaCursos()->buscar(idCurso);
     if (aux==nullptr) return "";
 
@@ -135,7 +132,7 @@ string Controladora::mostrarEstudiantePorCurso(UniversidadAlbertoMagno *u,int id
     return aux2->toString();
 }
 
-string Controladora::mostrarProfesorAsignado(UniversidadAlbertoMagno *u, int id) {
+string Controladora::mostrarProfesorAsignado(UniversidadAlbertoMagno *u, string id) {
     Curso *aux= u->getListaCursos()->buscar(id);
     if (aux==nullptr) return "";
 
@@ -154,21 +151,21 @@ string Controladora::mostrarTodosLosCursos(UniversidadAlbertoMagno *u) {
     return u->getListaCursos()->toString();
 }
 
-double Controladora::mostrarPromedioPorEstudiante(UniversidadAlbertoMagno *u, int id) {
+double Controladora::mostrarPromedioPorEstudiante(UniversidadAlbertoMagno *u, string id) {
     Persona *aux= u->getListaEstudiantes()->buscar(id);
     if (aux==nullptr) return 0;
 
     return aux->getCalificacionGlobal();
 }
 
-double Controladora::mostrarPromedioPorProfesor(UniversidadAlbertoMagno *u, int id) {
+double Controladora::mostrarPromedioPorProfesor(UniversidadAlbertoMagno *u, string id) {
     Persona *aux= u->getListaProfesores()->buscar(id);
     if (aux==nullptr) return 0;
 
     return aux->getCalificacionGlobal();
 }
 
-double Controladora::mostrarPromedioPorCurso(UniversidadAlbertoMagno* u, int id) {
+double Controladora::mostrarPromedioPorCurso(UniversidadAlbertoMagno* u, string id) {
     Curso* c = u->getListaCursos()->buscar(id);
     if (c == nullptr) {
         return 0;
@@ -177,14 +174,14 @@ double Controladora::mostrarPromedioPorCurso(UniversidadAlbertoMagno* u, int id)
     return c->calcularPromedio();
 }
 
-string Controladora::mostrarHorarioProfesor(UniversidadAlbertoMagno *u, int id) {
+string Controladora::mostrarHorarioProfesor(UniversidadAlbertoMagno *u, string id) {
     Persona *aux= u->getListaProfesores()->buscar(id);
     if (aux==nullptr) return "";
 
     return aux->getHorario()->toString();
 }
 
-string Controladora::mostrarHorarioAlumno(UniversidadAlbertoMagno *u, int id) {
+string Controladora::mostrarHorarioAlumno(UniversidadAlbertoMagno *u, string id) {
     Persona *aux= u->getListaEstudiantes()->buscar(id);
     if (aux==nullptr) return "";
 

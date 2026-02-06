@@ -4,7 +4,7 @@
 
 #include "Curso.h"
 
-Curso::Curso(int codigo,
+Curso::Curso(string codigo,
     string nombre,
     int dia,
     int hora,
@@ -18,7 +18,6 @@ Curso::Curso(int codigo,
     this->profesorAsignado = profesor;
     this->listaEstudiantes = new ListaPersonas();
     this->limiteCupos = limiteCupos;
-    this->cantidadEstudiantes = 0;
 }
 
 Curso::~Curso() {
@@ -28,23 +27,7 @@ Persona * Curso::getProfesorAsignado() {return this->profesorAsignado;}
 
 ListaPersonas * Curso::getListaEstudiantes() {return this->listaEstudiantes;}
 
-bool Curso::agregarEstudiante(Persona*estudiante) {
-    if (limiteCupos && estudiante!=nullptr) {
-        listaEstudiantes->agregarPrimero(estudiante);
-        cantidadEstudiantes++;
-        return true;
-    }
-    return false;
-}
-
-bool Curso::eliminarEstudiante(Persona*estudiante) {
-    if (listaEstudiantes->eliminar(estudiante->getId())) {
-        return true;
-    }
-    return false;
-}
-
-int Curso::getCodigo() {return codigo;}
+string Curso::getCodigo() {return codigo;}
 
 string Curso::getNombre() {return nombre;}
 

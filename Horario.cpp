@@ -61,7 +61,7 @@ bool Horario::franjaVacia(int franja) {
     return true;
 }
 
-Curso *Horario::buscarCurso(int codigo) {
+Curso *Horario::buscarCurso(string codigo) {
     Curso *curso;
     for (int i=0; i<DIAS; i++) {
         for (int j=0; j<FRANJA; j++) {

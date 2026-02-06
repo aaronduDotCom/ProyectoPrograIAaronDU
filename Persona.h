@@ -17,23 +17,23 @@ using namespace std;
 class Persona {
 protected:
     string nombreCompleto; //Ej: "Carlos Andres Morales Torres"
-    int identificacion; //5 digitos
+    string identificacion; //5 digitos
 public:
     Persona();
-    Persona(string nombre, int identificacion);
-    virtual ~Persona();
+    Persona(string nombre, string identificacion);
+    virtual ~Persona()=default;
 
     string getNombre();
     void setNombre(string nombre);
-    int getId();
-    void setId(int id);
+    string getId();
+    void setId(string id);
 
     virtual double getCalificacionGlobal() = 0;
     virtual void setCalificacionGlobal(double) = 0;
     virtual Horario* getHorario() = 0;
 
     virtual bool matricularCurso(Curso*curso) = 0;
-    virtual bool desmatricularCurso(int cod) = 0;
+    virtual bool desmatricularCurso(string cod) = 0;
 
     virtual string toString();
 };

@@ -8,7 +8,7 @@ Profesor::Profesor():Persona() {
     horario = new Horario();
 }
 
-Profesor::Profesor(string nombre, int id):Persona(nombre,id) {
+Profesor::Profesor(string nombre, string id):Persona(nombre,id) {
     horario = new Horario();
 }
 
@@ -29,11 +29,11 @@ bool Profesor::matricularCurso(Curso *curso) {
     return false;
 }
 
-bool Profesor::desmatricularCurso(int cod) {
+bool Profesor::desmatricularCurso(string cod) {
     return false;
 }
 
-bool Profesor::asignarCurso(int cod) {
+bool Profesor::asignarCurso(string cod) {
     Curso* aux = horario->buscarCurso(cod);
     if (aux != nullptr) {
         aux->setProfesorAsignado(this);
@@ -43,7 +43,7 @@ bool Profesor::asignarCurso(int cod) {
 
 }
 
-bool Profesor::desasignarCurso(int cod) {
+bool Profesor::desasignarCurso(string cod) {
     Curso* aux = horario->buscarCurso(cod);
     if (aux != nullptr) {
         aux->setProfesorAsignado(nullptr);
@@ -52,7 +52,7 @@ bool Profesor::desasignarCurso(int cod) {
     return false;
 }
 
-void Profesor::asignarNota(int codCur, int codEst, int nuevaNota) {
+void Profesor::asignarNota(string codCur, string codEst, double nuevaNota) {
     horario->buscarCurso(codCur)->getListaEstudiantes()->buscar(codEst)->setCalificacionGlobal(nuevaNota);
 }
 

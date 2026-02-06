@@ -17,6 +17,7 @@ private:
 public:
     Interfaz();
     ~Interfaz();
+    bool leerInt(int& x);
     void ejecutarInterfaz(Controladora *c);
 };
 

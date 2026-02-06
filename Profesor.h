@@ -18,7 +18,7 @@ private:
     Horario *horario;
 public:
     Profesor();
-    Profesor(string nombre, int id);
+    Profesor(string nombre, string id);
     ~Profesor() override;
 
     double getCalificacionGlobal() override;
@@ -26,12 +26,12 @@ public:
     Horario *getHorario() override;
 
     bool matricularCurso(Curso*curso) override;
-    bool desmatricularCurso(int cod) override;
+    bool desmatricularCurso(string cod) override;
 
-    bool asignarCurso(int cod);
-    bool desasignarCurso(int cod);
+    bool asignarCurso(string cod);
+    bool desasignarCurso(string cod);
 
-    void asignarNota(int codCur, int codEst, int nuevaNota);
+    void asignarNota(string codCur, string codEst, double nuevaNota);
 
     string toString() override;
 

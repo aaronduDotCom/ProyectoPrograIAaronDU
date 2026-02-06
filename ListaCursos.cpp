@@ -76,11 +76,12 @@ bool ListaCursos::eliminarUltimo() {
     return false;
 }
 
-bool ListaCursos::eliminar(int id) {
+bool ListaCursos::eliminar(string id) {
     if (vacia()) return false;
 
     if (primero->getCurso()->getCodigo()==id) {
         eliminarPrimero();
+        return true;
     }
 
     actual=primero;
@@ -100,7 +101,7 @@ bool ListaCursos::eliminar(int id) {
     return false;
 }
 
-Curso * ListaCursos::buscar(int id) {
+Curso * ListaCursos::buscar(string id) {
     if (primero->getCurso()->getCodigo()==id) {
         return primero->getCurso();
     }
