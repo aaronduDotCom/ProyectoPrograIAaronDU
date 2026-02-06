@@ -23,16 +23,21 @@ bool Controladora::registrarProfesores(UniversidadAlbertoMagno *u, string nombre
     }
 
     Persona* profesor = new Profesor(nombre, id);
-    u->getListaEstudiantes()->agregarPrimero(profesor);
+    u->getListaProfesores()->agregarPrimero(profesor);
     return true;
 }
 
 bool Controladora::registrarCursos(UniversidadAlbertoMagno *u, string id, string nombre, int dia, int hora,string idProfesor, int limiteCupos) {
-    if (u->getListaProfesores()->buscar(id) != nullptr) {
+    if (u->getListaCursos()->buscar(id) != nullptr) {
         return false;
     }
 
+    if (dia < 0 || dia > 7) return false;
+    if (hora < 0 || hora > 12) return false;
+
     Persona*aux = u->getListaProfesores()->buscar(idProfesor);
+    if (aux==nullptr) return false;
+
     Curso* curso = new Curso(id, nombre, dia, hora, aux, limiteCupos);
     u->getListaCursos()->agregarPrimero(curso);
     return true;
@@ -76,8 +81,13 @@ bool Controladora::reasignarProfesor(UniversidadAlbertoMagno *u, string idCurso,
         return false;
     }
 
-    cursoAux->setProfesorAsignado(profesorAux);
-    return true;
+    if (profesorAux->getHorario()->buscarCurso(idCurso)==nullptr) {
+        cursoAux->setProfesorAsignado(profesorAux);
+        profesorAux->matricularCurso(cursoAux);
+        return true;
+    }
+
+    return false;
 }
 
 bool Controladora::matricularCurso(UniversidadAlbertoMagno *u, string idEstudiante, string idCursos) {
@@ -87,6 +97,7 @@ bool Controladora::matricularCurso(UniversidadAlbertoMagno *u, string idEstudian
     if (aux==nullptr||aux2==nullptr) return false;
 
     aux->matricularCurso(aux2);
+    return true;
 }
 
 bool Controladora::desmatricularCurso(UniversidadAlbertoMagno *u, string idEstudiante, string idCursos) {
@@ -96,6 +107,7 @@ bool Controladora::desmatricularCurso(UniversidadAlbertoMagno *u, string idEstud
     if (aux==nullptr||aux2==nullptr) return false;
 
     aux->desmatricularCurso(aux2->getCodigo());
+    return true;
 }
 
 string Controladora::mostrarEstudiante(UniversidadAlbertoMagno *u, string id) {
@@ -144,7 +156,7 @@ string Controladora::mostrarTodosLosEstudiantes(UniversidadAlbertoMagno *u) {
 }
 
 string Controladora::mostrarTodosLosProfesores(UniversidadAlbertoMagno *u) {
-    return u->getListaEstudiantes()->toString();
+    return u->getListaProfesores()->toString();
 }
 
 string Controladora::mostrarTodosLosCursos(UniversidadAlbertoMagno *u) {

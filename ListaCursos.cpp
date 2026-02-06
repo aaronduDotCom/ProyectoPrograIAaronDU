@@ -21,26 +21,18 @@ bool ListaCursos::vacia() {
     return primero==nullptr;
 }
 
-void ListaCursos::agregarPrimero(Curso *curso) {
-    if (vacia()) {
-        primero=new NodoCursos(nullptr, curso);
+bool ListaCursos::agregarPrimero(Curso *curso) {
+    if (buscar(curso->getCodigo()) != nullptr) {
+        return false;
 
-    }else if (buscar(curso->getCodigo())==nullptr) {
-        actual=primero;
-        actual->setSig(new NodoCursos(primero, curso));
-        primero=actual;
+    }else {
+        primero = new NodoCursos(primero, curso);
+        return true;
     }
 }
 
 bool ListaCursos::eliminarPrimero() {
     if (vacia()) {return false;}
-
-    if (primero->getSig()==nullptr) {
-        delete primero;
-        primero=nullptr;
-
-        return true;
-    }
 
     actual=primero;
     primero=primero->getSig();
@@ -56,6 +48,7 @@ bool ListaCursos::eliminarUltimo() {
 
     if (primero->getSig()==nullptr) {
         delete primero;
+        primero = nullptr;
         return true;
     }
 
@@ -102,12 +95,10 @@ bool ListaCursos::eliminar(string id) {
 }
 
 Curso * ListaCursos::buscar(string id) {
-    if (primero->getCurso()->getCodigo()==id) {
-        return primero->getCurso();
-    }
+    if (vacia()) return nullptr;
 
     actual=primero;
-    while (actual->getSig()!=nullptr) {
+    while (actual!=nullptr) {
         if (actual->getCurso()->getCodigo()==id) {
             return actual->getCurso();
         }

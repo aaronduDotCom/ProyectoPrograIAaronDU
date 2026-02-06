@@ -18,7 +18,7 @@ public:
     NodoCursos *getPrimero();
 
     bool vacia();
-    void agregarPrimero(Curso*curso);
+    bool agregarPrimero(Curso*curso);
     bool eliminarPrimero();
     bool eliminarUltimo();
     bool eliminar(string id);

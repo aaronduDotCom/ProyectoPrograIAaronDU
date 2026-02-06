@@ -24,6 +24,7 @@ public:
 
     Curso* getCurso(int x,int y);
     void setCurso(Curso *curso);
+    void eliminarCurso(int dia, int hora);
 
     bool vacia();
     bool franjaVacia(int franja);

@@ -30,13 +30,22 @@ Curso * Horario::getCurso(int x,int y) {
 }
 
 void Horario::setCurso(Curso *curso) {
-    if (curso == nullptr) return;
+    if (curso->getDia() < 0 || curso->getDia() > 6) return;
+    if (curso->getHora() < 0 || curso->getHora() > 11) return;
 
     int dia = curso->getDia();
     int hora = curso->getHora();
 
     *(*(m+dia)+hora)=curso;
 }
+
+void Horario::eliminarCurso(int dia, int hora) {
+    if (dia < 0 || dia >= DIAS) return;
+    if (hora < 0 || hora >= FRANJA) return;
+
+    *(*(m+dia)+hora) = nullptr;
+}
+
 
 bool Horario::vacia() {
     bool result = true;
@@ -53,6 +62,10 @@ bool Horario::vacia() {
 }
 
 bool Horario::franjaVacia(int franja) {
+    if (franja < 0 || franja >= FRANJA) return false;
+
+    if (vacia()) return true;
+
     for (int i=0; i<DIAS; i++) {
         if (*(*(m+i)+franja)!=nullptr) {
             return false;
@@ -62,30 +75,43 @@ bool Horario::franjaVacia(int franja) {
 }
 
 Curso *Horario::buscarCurso(string codigo) {
-    Curso *curso;
     for (int i=0; i<DIAS; i++) {
         for (int j=0; j<FRANJA; j++) {
-            if ((*(*(m+i)+j))->getCodigo()==codigo) {
-                curso=*(*(m+i)+j);
+
+            if ((*(*(m+i)+j))!=nullptr) {
+                if ((*(*(m+i)+j))->getCodigo()==codigo) {
+                return *(*(m+i)+j);
+                }
             }
         }
     }
-    return curso;
+    return nullptr;
 }
 
+//Este si me lo medio hizo mi compa gpt
 string Horario::toString() {
     stringstream ss;
-    for (int i=0; i<DIAS; i++) {
-        for (int j=0; j<FRANJA; j++) {
-            if ((*(*(m+i)+j))!=nullptr) {
-                ss<<" | "<<(*(*(m+i)+j))->getNombre();
-            }else {
-                ss<<"\t\t";
-            }
 
+    ss << "Horario \n";
+    ss << "************************************************\n";
+    ss << "Hora | Lun | Mar | Mie | Jue | Vie | Sab | Dom |\n";
+    ss << "************************************************\n";
+
+    for (int h = 0; h < FRANJA; h++) {
+        ss << (h + 8) << "\t |";
+
+        for (int d = 0; d < DIAS; d++) {
+            if (*(*(m+d)+h) != nullptr) {
+                ss << " " << (*(*(m+d)+h))->getNombre();
+            } else {
+                ss << "\t";
+            }
+            ss << " |";
         }
-        ss<<" | "<<endl;
+        ss << endl;
     }
+    ss << endl;
 
     return ss.str();
 }
+

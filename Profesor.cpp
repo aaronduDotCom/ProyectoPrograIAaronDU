@@ -25,11 +25,31 @@ void Profesor::setCalificacionGlobal(double) {
 
 Horario *Profesor::getHorario() {return horario;}
 
-bool Profesor::matricularCurso(Curso *curso) {
+bool Profesor::matricularCurso(Curso*curso) {
+
+    Curso*aux=horario->buscarCurso(curso->getCodigo());
+
+    if(aux!=nullptr && horario->franjaVacia(aux->getHora())) {
+
+        if (aux->getListaEstudiantes()->agregarPrimero(this)) {
+            horario->setCurso(curso);
+            return true;
+        }
+    }
     return false;
 }
 
 bool Profesor::desmatricularCurso(string cod) {
+
+    Curso*aux=horario->buscarCurso(cod);
+
+    if(aux!=nullptr) {
+
+        if (aux->getListaEstudiantes()->eliminar(this->getId())) {
+            horario->setCurso(nullptr);
+            return true;
+        }
+    }
     return false;
 }
 

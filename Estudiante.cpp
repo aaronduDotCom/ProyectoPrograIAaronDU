@@ -26,11 +26,9 @@ Horario *Estudiante::getHorario() {return horario;}
 
 bool Estudiante::matricularCurso(Curso*curso) {
 
-    Curso*aux=horario->buscarCurso(curso->getCodigo());
+    if(horario->franjaVacia(curso->getHora())) {
 
-    if(aux!=nullptr && horario->franjaVacia(aux->getHora())) {
-
-        if (aux->getListaEstudiantes()->agregarPrimero(this)) {
+        if (curso->getListaEstudiantes()->agregarPrimero(this)) {
             horario->setCurso(curso);
             return true;
         }
@@ -39,13 +37,12 @@ bool Estudiante::matricularCurso(Curso*curso) {
 }
 
 bool Estudiante::desmatricularCurso(string cod) {
-
     Curso*aux=horario->buscarCurso(cod);
 
     if(aux!=nullptr) {
 
         if (aux->getListaEstudiantes()->eliminar(this->getId())) {
-            horario->setCurso(nullptr);
+            horario->eliminarCurso(aux->getDia(),aux->getHora());
             return true;
         }
     }

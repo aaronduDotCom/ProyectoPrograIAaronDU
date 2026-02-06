@@ -22,28 +22,17 @@ bool ListaPersonas::vacia() {
 }
 
 bool ListaPersonas::agregarPrimero(Persona *estudiante) {
-    if (vacia()) {
-        primero=new NodoPersonas(estudiante, primero);
-        return true;
-
-    }else if (buscar(estudiante->getId()) != nullptr) {
+    if (buscar(estudiante->getId()) != nullptr) {
         return false;
 
     }else {
-        primero->setSig(new NodoPersonas(estudiante, primero));
+        primero = new NodoPersonas(estudiante, primero);
         return true;
     }
 }
 
 bool ListaPersonas::eliminarPrimero() {
     if (vacia()) {return false;}
-
-    if (primero->getSig()==nullptr) {
-        delete primero;
-        primero=nullptr;
-
-        return true;
-    }
 
     actual=primero;
     primero=primero->getSig();
@@ -58,6 +47,7 @@ bool ListaPersonas::eliminarUltimo() {
 
     if (primero->getSig()==nullptr) {
         delete primero;
+        primero=nullptr;
         return true;
     }
 
@@ -107,7 +97,6 @@ Persona* ListaPersonas::buscar(string id) {
     if (vacia()) return nullptr;
 
     actual = primero;
-
     while (actual != nullptr) {
         if (actual->getPersona()->getId() == id) {
             return actual->getPersona();

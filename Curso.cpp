@@ -39,7 +39,7 @@ void Curso::setProfesorAsignado(Persona *profesor) {this->profesorAsignado = pro
 
 string Curso::toString() {
     stringstream ss;
-    ss<<nombre<<endl<<codigo<<profesorAsignado->getNombre()<<"\n\n";
+    ss<<nombre<<endl<<codigo<<endl<<profesorAsignado->getNombre()<<"\n\n";
     return ss.str();
 }
 
