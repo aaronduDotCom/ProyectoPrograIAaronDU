@@ -18,9 +18,7 @@ Curso::Curso(string codigo,
     this->profesorAsignado = profesor;
     this->listaEstudiantes = new ListaPersonas();
     this->limiteCupos = limiteCupos;
-}
-
-Curso::~Curso() {
+    this->cuposAsignados = 0;
 }
 
 Persona * Curso::getProfesorAsignado() {return this->profesorAsignado;}
@@ -34,6 +32,12 @@ string Curso::getNombre() {return nombre;}
 int Curso::getDia() {return dia;}
 
 int Curso::getHora() {return hora;}
+
+int Curso::getLimiteCupos() {return limiteCupos;}
+
+int Curso::getCuposAsignados() {return cuposAsignados;}
+
+void Curso::setCuposAsignados(int cuposAsignados) {this->cuposAsignados = cuposAsignados;}
 
 void Curso::setProfesorAsignado(Persona *profesor) {this->profesorAsignado = profesor;}
 

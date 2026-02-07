@@ -93,16 +93,16 @@ string Horario::toString() {
     stringstream ss;
 
     ss << "Horario \n";
-    ss << "************************************************\n";
-    ss << "Hora | Lun | Mar | Mie | Jue | Vie | Sab | Dom |\n";
-    ss << "************************************************\n";
+    ss << "******************************************************************\n";
+    ss << "  Hora   |  Lun  |  Mar  |  Mie  |  Jue  |  Vie  |  Sab  |  Dom  |\n";
+    ss << "******************************************************************\n";
 
     for (int h = 0; h < FRANJA; h++) {
         ss << (h + 8) << "\t |";
 
         for (int d = 0; d < DIAS; d++) {
             if (*(*(m+d)+h) != nullptr) {
-                ss << " " << (*(*(m+d)+h))->getNombre();
+                ss << " " << (*(*(m+d)+h))->getNombre() << "\t";
             } else {
                 ss << "\t";
             }

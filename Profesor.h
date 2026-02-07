@@ -31,8 +31,6 @@ public:
     bool asignarCurso(string cod);
     bool desasignarCurso(string cod);
 
-    void asignarNota(string codCur, string codEst, double nuevaNota);
-
     string toString() override;
 
     double calcularPromedio();

@@ -32,13 +32,15 @@ bool Controladora::registrarCursos(UniversidadAlbertoMagno *u, string id, string
         return false;
     }
 
+    if (limiteCupos<1) return false;
     if (dia < 0 || dia > 7) return false;
     if (hora < 0 || hora > 12) return false;
 
     Persona*aux = u->getListaProfesores()->buscar(idProfesor);
-    if (aux==nullptr) return false;
+    if (aux==nullptr || aux->getHorario()->buscarCurso(id)) return false;
 
     Curso* curso = new Curso(id, nombre, dia, hora, aux, limiteCupos);
+    aux->matricularCurso(curso);
     u->getListaCursos()->agregarPrimero(curso);
     return true;
 }
@@ -90,23 +92,80 @@ bool Controladora::reasignarProfesor(UniversidadAlbertoMagno *u, string idCurso,
     return false;
 }
 
-bool Controladora::matricularCurso(UniversidadAlbertoMagno *u, string idEstudiante, string idCursos) {
-    Persona*aux=u->getListaEstudiantes()->buscar(idEstudiante);
-    Curso*aux2=u->getListaCursos()->buscar(idCursos);
+bool Controladora::cambiarNota(UniversidadAlbertoMagno *u, string idProf, string idCur, string idEst, double nuevaNota) {
 
-    if (aux==nullptr||aux2==nullptr) return false;
+    bool resultado = false;
 
-    aux->matricularCurso(aux2);
+    if (u != nullptr && nuevaNota >= 0 && nuevaNota <= 100) {
+
+        Persona* profesor = u->getListaProfesores()->buscar(idProf);
+        Persona* estudiante = u->getListaEstudiantes()->buscar(idEst);
+        Curso* curso = u->getListaCursos()->buscar(idCur);
+
+        if (profesor != nullptr && estudiante != nullptr && curso != nullptr) {
+
+            if (curso->getProfesorAsignado() == profesor) {
+
+                Horario* horarioEst = estudiante->getHorario();
+
+                if (horarioEst != nullptr) {
+
+                    Curso* cursoMat = horarioEst->buscarCurso(curso->getCodigo());
+
+                    if (cursoMat != nullptr) {
+
+                        ListaPersonas* listaEst = cursoMat->getListaEstudiantes();
+
+                        if (listaEst != nullptr) {
+
+                            Persona* estACambiar = listaEst->buscar(idEst);
+
+                            if (estACambiar != nullptr) {
+
+                                estACambiar->setCalificacionGlobal(nuevaNota);
+
+                                if (estACambiar->getCalificacionGlobal()==nuevaNota) {
+                                    resultado = true;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    return resultado;
+}
+
+
+bool Controladora::matricularCurso(UniversidadAlbertoMagno *u,string idEstudiante,string idCurso) {
+    if (u == nullptr) return false;
+
+    Persona* estudiante = u->getListaEstudiantes()->buscar(idEstudiante);
+    Curso* curso = u->getListaCursos()->buscar(idCurso);
+
+    if (estudiante == nullptr || curso == nullptr) return false;
+
+    if (curso->getCuposAsignados() >= curso->getLimiteCupos())
+        return false;
+
+    if (!estudiante->matricularCurso(curso))
+        return false;
+    curso->setCuposAsignados(curso->getCuposAsignados() + 1);
     return true;
 }
 
-bool Controladora::desmatricularCurso(UniversidadAlbertoMagno *u, string idEstudiante, string idCursos) {
-    Persona*aux=u->getListaEstudiantes()->buscar(idEstudiante);
-    Curso*aux2=u->getListaCursos()->buscar(idCursos);
+bool Controladora::desmatricularCurso(UniversidadAlbertoMagno *u,string idEstudiante,string idCurso) {
 
-    if (aux==nullptr||aux2==nullptr) return false;
+    Persona* estudiante = u->getListaEstudiantes()->buscar(idEstudiante);
+    Curso* curso = u->getListaCursos()->buscar(idCurso);
 
-    aux->desmatricularCurso(aux2->getCodigo());
+    if (estudiante == nullptr || curso == nullptr) return false;
+
+    if (!estudiante->desmatricularCurso(idCurso))
+        return false;
+
+    curso->setCuposAsignados(curso->getCuposAsignados() - 1);
     return true;
 }
 

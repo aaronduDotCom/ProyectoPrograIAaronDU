@@ -3,10 +3,7 @@
 //
 
 #include "Interfaz.h"
-#include "Estudiante.h"
-#include "Profesor.h"
 #include "Controladora.h"
-
 #include <limits>
 
 Interfaz::Interfaz() {
@@ -18,6 +15,17 @@ Interfaz::~Interfaz() {
 }
 
 bool Interfaz::leerInt(int& x) {
+    cin >> x;
+    if (cin.fail()) {
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        return false;
+    }
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    return true;
+}
+
+bool Interfaz::leerDouble(double& x) {
     cin >> x;
     if (cin.fail()) {
         cin.clear();
@@ -49,18 +57,14 @@ void Interfaz::ejecutarInterfaz(Controladora*c) {
                 <<"0.Salir del sistema\n";
         }//primer menu
         if (!leerInt(opcion)) continue;
-
         if (opcion<0||opcion>4) {opcion=0;}
         switch (opcion) {
             case 1: {
                 int opcionSubmenu1=1;
                 while (opcionSubmenu1!=0) {
                         cout<<"**********************************************************\n"
-                        <<"*                                                        *\n"
                         <<"*         Opciones de gestion de la universidad          *\n"
-                        <<"*                                                        *\n"
                         <<"*               Universidad Alberto Magno                *\n"
-                        <<"*                                                        *\n"
                         <<"**********************************************************\n";
                     cout<<"\nIngrese una opcion: \n"
                         <<"1.Mostrar todos los estudiantes\n"
@@ -92,11 +96,8 @@ void Interfaz::ejecutarInterfaz(Controladora*c) {
                 int opcionSubmenu2=1;
                 while (opcionSubmenu2!=0) {
                     cout<<"**********************************************************\n"
-                    <<"*                                                        *\n"
                     <<"*          Opciones de gestion de estudiantes            *\n"
-                    <<"*                                                        *\n"
                     <<"*               Universidad Alberto Magno                *\n"
-                    <<"*                                                        *\n"
                     <<"**********************************************************\n";
                     cout<<"\nIngrese una opcion: \n"
                     <<"1.Registrar un nuevo estudiante\n"
@@ -172,10 +173,10 @@ void Interfaz::ejecutarInterfaz(Controladora*c) {
 
                             if (auxEst != nullptr && auxCur != nullptr) {
                                 if (c->matricularCurso(ualma, idEst, idCur)) {
-                                cout <<"El curso ha sido matriculado exitosamente\n";
-                                } else {
-                                cout <<"El curso no ha podido ser matriculado\n";
+                                    cout <<"El curso ha sido matriculado exitosamente\n";
                                 }
+                            }else {
+                                cout <<"El curso no ha podido ser matriculado\n";
                             }
 
                         }break;
@@ -259,23 +260,21 @@ void Interfaz::ejecutarInterfaz(Controladora*c) {
                 int opcionSubmenu3=1;
                     while (opcionSubmenu3!=0) {
                         cout<<"**********************************************************\n"
-                        <<"*                                                        *\n"
                         <<"*           Opciones de gestion de profesores            *\n"
-                        <<"*                                                        *\n"
                         <<"*               Universidad Alberto Magno                *\n"
-                        <<"*                                                        *\n"
                         <<"**********************************************************\n";
                         cout<<"\nIngrese una opcion: \n"
                         <<"1.Contratar un nuevo profesor\n"
                         <<"2.Despedir un profesor\n"
                         <<"3.Mostrar informacion de un profesor\n"
-                        <<"4.Cambiar la nota de un estudiante\n"
-                        <<"5.Mostrar promedio por profesor\n"
+                        <<"4.Mostrar el horario de un profesor\n"
+                        <<"5.Cambiar la nota de un estudiante\n"
+                        <<"6.Mostrar promedio por profesor\n"
                         <<"0.Salir de la opcion\n";
 
                         if (!leerInt(opcionSubmenu3)) continue;
 
-                        if (opcionSubmenu3<0||opcionSubmenu3>4) {opcionSubmenu3=0;}
+                        if (opcionSubmenu3<0||opcionSubmenu3>6) {opcionSubmenu3=0;}
                         switch (opcionSubmenu3) {
                             case 1: {
                                 cout<<"Contratar un nuevo profesor\n";
@@ -310,7 +309,6 @@ void Interfaz::ejecutarInterfaz(Controladora*c) {
                                 getline(cin,id);
 
                                 string nombre=" ";
-
                                 Persona *aux=ualma->getListaProfesores()->buscar(id);
                                 if (aux!=nullptr)
                                     nombre=aux->getNombre();
@@ -337,7 +335,68 @@ void Interfaz::ejecutarInterfaz(Controladora*c) {
                                     cout <<"El profesor no se encontro\n";
                                 }
                             }break;
-                            case 4:{}break;
+                            case 4: {
+                                cout<<"Mostrar el horario de un profesor\n";
+
+                                string idProf;
+                                cout<<"Ingrese el numero de identificacion del profesor\n";
+
+                                getline(cin,idProf);
+
+                                Persona *auxProf=ualma->getListaProfesores()->buscar(idProf);
+
+                                if (auxProf!=nullptr) {
+                                    cout <<auxProf->getHorario()->toString();
+                                } else {
+                                    cout <<"El profesor no se encontro\n";
+                                }
+                            }break;
+                            case 5: {
+                                cout<<"Cambiar la nota de un estudiante\n";
+
+                                string idProf;
+                                cout<<"Ingrese el numero de identificacion del profesor\n";
+                                getline(cin,idProf);
+
+                                string idCur;
+                                cout<<"Ingrese el codigo del curso\n";
+                                getline(cin,idCur);
+
+                                string idEst;
+                                cout<<"Ingrese el numero de identificacion del estudiante\n";
+                                getline(cin,idEst);
+
+                                double nuevaNota;
+                                cout<<"Ingrese la nueva nota\n";
+                                if (!leerDouble(nuevaNota)) continue;
+
+                                if (!leerDouble(nuevaNota) || nuevaNota < 0 || nuevaNota > 100) {
+                                    if (c->cambiarNota(ualma, idProf, idCur, idEst,nuevaNota)) {
+                                    cout <<"La nota ha sido cambiada exitosamente\n";
+                                    cout <<ualma->getListaEstudiantes()->buscar(idEst)->getCalificacionGlobal() << endl;
+                                    } else {
+                                        cout <<"La nota no ha podido ser cambiada\n";
+                                    }
+                                }
+
+
+                            }break;
+                            case 6: {
+                                cout<<"Mostrar promedio por profesor\n";
+
+                                string id;
+                                cout<<"Ingrese el numero de identificacion del profesor\n";
+
+                                getline(cin,id);
+
+                                Persona *aux=ualma->getListaProfesores()->buscar(id);
+
+                                if (aux!=nullptr) {
+                                    cout <<c->mostrarPromedioPorProfesor(ualma,id) << endl;
+                                } else {
+                                    cout <<"El profesor no se encontro\n";
+                                }
+                            }break;
                             default:{}break;
                     }
                 }
@@ -346,11 +405,8 @@ void Interfaz::ejecutarInterfaz(Controladora*c) {
                 int opcionSubmenu4=1;
                     while (opcionSubmenu4!=0) {
                         cout<<"**********************************************************\n"
-                         <<"*                                                        *\n"
                          <<"*             Opciones de gestion de cursos              *\n"
-                         <<"*                                                        *\n"
                          <<"*               Universidad Alberto Magno                *\n"
-                         <<"*                                                        *\n"
                          <<"**********************************************************\n";
                         cout<<"\nIngrese una opcion: \n"
                         <<"1.Agregar un curso\n"
@@ -451,7 +507,7 @@ void Interfaz::ejecutarInterfaz(Controladora*c) {
                             Curso *aux=ualma->getListaCursos()->buscar(id);
 
                             if (aux!=nullptr) {
-                                cout <<c->mostrarPromedioPorCurso(ualma,aux->getCodigo());
+                                cout <<c->mostrarPromedioPorCurso(ualma,aux->getCodigo())<<endl;
                             } else {
                                 cout <<"El curso no se encontro\n";
                             }
@@ -475,7 +531,7 @@ void Interfaz::ejecutarInterfaz(Controladora*c) {
 
                         }break;
                         case 6: {
-                            cout<<"Matricular curso\n";
+                            cout<<"Reasignar profesor\n";
 
                             string idCur;
                             cout<<"Ingrese el codigo del curso\n";
@@ -492,9 +548,9 @@ void Interfaz::ejecutarInterfaz(Controladora*c) {
 
                             if (auxProf != nullptr && auxCur != nullptr) {
                                 if (c->reasignarProfesor(ualma, idCur, idProf)) {
-                                    cout <<"El profesor a sido reasignado\n";
+                                    cout <<"El profesor ha sido reasignado\n";
                                 } else {
-                                    cout <<"El profesor a podido ser reasignado\n";
+                                    cout <<"El profesor no ha podido ser reasignado\n";
                                 }
                             }
 

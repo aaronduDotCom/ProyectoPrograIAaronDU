@@ -25,18 +25,21 @@ private:
     Persona *profesorAsignado;
     ListaPersonas *listaEstudiantes;
     int limiteCupos;
+    int cuposAsignados;
 public:
     Curso(string codigo, string nombre, int dia, int hora, Persona *profesor, int limiteCupos);
-    ~Curso();
+    ~Curso()=default;
 
     Persona* getProfesorAsignado();
     ListaPersonas* getListaEstudiantes();
-
     string getCodigo();
     string getNombre();
     int getDia();
     int getHora();
+    int getLimiteCupos();
+    int getCuposAsignados();
 
+    void setCuposAsignados(int cuposAsignados);
     void setProfesorAsignado(Persona *profesor);
 
     string toString();

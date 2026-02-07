@@ -29,9 +29,9 @@ bool Profesor::matricularCurso(Curso*curso) {
 
     Curso*aux=horario->buscarCurso(curso->getCodigo());
 
-    if(aux!=nullptr && horario->franjaVacia(aux->getHora())) {
+    if(aux==nullptr && horario->franjaVacia(curso->getHora())) {
 
-        if (aux->getListaEstudiantes()->agregarPrimero(this)) {
+        if (curso->getProfesorAsignado()==this) {
             horario->setCurso(curso);
             return true;
         }
@@ -44,11 +44,8 @@ bool Profesor::desmatricularCurso(string cod) {
     Curso*aux=horario->buscarCurso(cod);
 
     if(aux!=nullptr) {
-
-        if (aux->getListaEstudiantes()->eliminar(this->getId())) {
-            horario->setCurso(nullptr);
-            return true;
-        }
+        horario->eliminarCurso(aux->getDia(),aux->getHora());
+        return true;
     }
     return false;
 }
@@ -70,10 +67,6 @@ bool Profesor::desasignarCurso(string cod) {
         return true;
     }
     return false;
-}
-
-void Profesor::asignarNota(string codCur, string codEst, double nuevaNota) {
-    horario->buscarCurso(codCur)->getListaEstudiantes()->buscar(codEst)->setCalificacionGlobal(nuevaNota);
 }
 
 string Profesor::toString() {

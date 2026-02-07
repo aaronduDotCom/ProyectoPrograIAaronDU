@@ -18,6 +18,7 @@ public:
     Interfaz();
     ~Interfaz();
     bool leerInt(int& x);
+    bool leerDouble(double& x);
     void ejecutarInterfaz(Controladora *c);
 };
 

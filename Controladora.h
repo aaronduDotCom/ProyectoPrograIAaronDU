@@ -25,6 +25,9 @@ public:
     //Nuevo profe pal curso
     bool reasignarProfesor(UniversidadAlbertoMagno*u,string idCurso,string idProfesor);
 
+    //Cambiar la nota
+    bool cambiarNota(UniversidadAlbertoMagno*u, string idProf, string idCur, string idEst, double nuevaNota);
+
     //poner y quitar cursos a los estudiantes
     bool matricularCurso(UniversidadAlbertoMagno*u,string idEstudiante, string idCursos);
     bool desmatricularCurso(UniversidadAlbertoMagno*u,string idEstudiante, string idCursos);
@@ -40,7 +43,7 @@ public:
     //mostrar individual en un curso especifico (profe)
     string mostrarProfesorAsignado(UniversidadAlbertoMagno*u,string id);
 
-    //mostrar todo
+    //mostrar universales
     string mostrarTodosLosEstudiantes(UniversidadAlbertoMagno*u);
     string mostrarTodosLosProfesores(UniversidadAlbertoMagno*u);
     string mostrarTodosLosCursos(UniversidadAlbertoMagno*u);
