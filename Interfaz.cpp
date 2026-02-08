@@ -171,7 +171,7 @@ void Interfaz::ejecutarInterfaz(Controladora*c) {
                             Persona *auxEst=ualma->getListaEstudiantes()->buscar(idEst);
                             Curso *auxCur=ualma->getListaCursos()->buscar(idCur);
 
-                            if (auxEst != nullptr && auxCur != nullptr) {
+                            if (auxEst != nullptr || auxCur != nullptr) {
                                 if (c->matricularCurso(ualma, idEst, idCur)) {
                                     cout <<"El curso ha sido matriculado exitosamente\n";
                                 }
@@ -368,19 +368,19 @@ void Interfaz::ejecutarInterfaz(Controladora*c) {
 
                                 double nuevaNota;
                                 cout<<"Ingrese la nueva nota\n";
-                                if (!leerDouble(nuevaNota)) continue;
+                                if (!leerDouble(nuevaNota)) break;
 
-                                if (!leerDouble(nuevaNota) || nuevaNota < 0 || nuevaNota > 100) {
-                                    if (c->cambiarNota(ualma, idProf, idCur, idEst,nuevaNota)) {
-                                    cout <<"La nota ha sido cambiada exitosamente\n";
-                                    cout <<ualma->getListaEstudiantes()->buscar(idEst)->getCalificacionGlobal() << endl;
+                                if (nuevaNota >= 0 && nuevaNota <= 100) {
+                                    if (c->cambiarNota(ualma, idProf, idCur, idEst, nuevaNota)) {
+                                        cout <<"La nota ha sido cambiada exitosamente\n";
+                                        cout << ualma->getListaEstudiantes()->buscar(idEst)->getCalificacionGlobal() << endl;
                                     } else {
                                         cout <<"La nota no ha podido ser cambiada\n";
                                     }
+                                } else {
+                                    cout << "Nota invalida (0-100)\n";
                                 }
-
-
-                            }break;
+                            } break;
                             case 6: {
                                 cout<<"Mostrar promedio por profesor\n";
 

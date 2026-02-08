@@ -137,7 +137,6 @@ bool Controladora::cambiarNota(UniversidadAlbertoMagno *u, string idProf, string
     return resultado;
 }
 
-
 bool Controladora::matricularCurso(UniversidadAlbertoMagno *u,string idEstudiante,string idCurso) {
     if (u == nullptr) return false;
 
@@ -160,7 +159,7 @@ bool Controladora::desmatricularCurso(UniversidadAlbertoMagno *u,string idEstudi
     Persona* estudiante = u->getListaEstudiantes()->buscar(idEstudiante);
     Curso* curso = u->getListaCursos()->buscar(idCurso);
 
-    if (estudiante == nullptr || curso == nullptr) return false;
+    if (estudiante == nullptr || curso == nullptr || curso->getCuposAsignados() == 0) return false;
 
     if (!estudiante->desmatricularCurso(idCurso))
         return false;
@@ -230,10 +229,34 @@ double Controladora::mostrarPromedioPorEstudiante(UniversidadAlbertoMagno *u, st
 }
 
 double Controladora::mostrarPromedioPorProfesor(UniversidadAlbertoMagno *u, string id) {
-    Persona *aux= u->getListaProfesores()->buscar(id);
-    if (aux==nullptr) return 0;
+    double resultado = 0;
+    double suma = 0;
+    int cantidadCursos = 0;
 
-    return aux->getCalificacionGlobal();
+    Persona* prof = u->getListaProfesores()->buscar(id);
+
+    if (prof != nullptr) {
+        Horario* h = prof->getHorario();
+
+        if (h != nullptr) {
+            for (int dia = 0; dia < DIAS; dia++) {
+                for (int franja = 0; franja < FRANJA; franja++) {
+                    Curso* c = h->getCurso(dia, franja);
+
+                    if (c != nullptr) {
+                        suma += c->calcularPromedio();
+                        cantidadCursos++;
+                    }
+                }
+            }
+
+            if (cantidadCursos > 0) {
+                resultado = suma / cantidadCursos;
+            }
+        }
+    }
+
+    return resultado;
 }
 
 double Controladora::mostrarPromedioPorCurso(UniversidadAlbertoMagno* u, string id) {
