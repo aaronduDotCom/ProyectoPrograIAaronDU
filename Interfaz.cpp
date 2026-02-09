@@ -36,9 +36,12 @@ bool Interfaz::leerDouble(double& x) {
     return true;
 }
 
-
 void Interfaz::ejecutarInterfaz(Controladora*c) {
     int opcion=1;
+
+    cout << "Cargando datos de prueba..." << endl;
+    c->cargarDatosPrueba(ualma);
+    cout << "Datos cargados correctamente" << endl;
 
     while (opcion!=0) {
         {
@@ -171,7 +174,7 @@ void Interfaz::ejecutarInterfaz(Controladora*c) {
                             Persona *auxEst=ualma->getListaEstudiantes()->buscar(idEst);
                             Curso *auxCur=ualma->getListaCursos()->buscar(idCur);
 
-                            if (auxEst != nullptr || auxCur != nullptr) {
+                            if (auxEst != nullptr && auxCur != nullptr) {
                                 if (c->matricularCurso(ualma, idEst, idCur)) {
                                     cout <<"El curso ha sido matriculado exitosamente\n";
                                 }
@@ -381,6 +384,7 @@ void Interfaz::ejecutarInterfaz(Controladora*c) {
                                     cout << "Nota invalida (0-100)\n";
                                 }
                             } break;
+
                             case 6: {
                                 cout<<"Mostrar promedio por profesor\n";
 
@@ -469,6 +473,7 @@ void Interfaz::ejecutarInterfaz(Controladora*c) {
 
                             string nombre;
                             Curso *aux=ualma->getListaCursos()->buscar(id);
+
                             if (aux!=nullptr)
                                 nombre=aux->getNombre();
 

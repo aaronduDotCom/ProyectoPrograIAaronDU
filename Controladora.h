@@ -56,6 +56,9 @@ public:
     //mostrar horarios
     string mostrarHorarioProfesor(UniversidadAlbertoMagno*u,string id);
     string mostrarHorarioAlumno(UniversidadAlbertoMagno*u,string id);
+
+
+    void cargarDatosPrueba(UniversidadAlbertoMagno* u);
 };
 
 #endif //PROYECTOPROGRAIAARONDU_CONTROLADORA_H

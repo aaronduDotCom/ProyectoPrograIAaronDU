@@ -65,31 +65,59 @@ bool Controladora::despedirProfesor(UniversidadAlbertoMagno *u, string id) {
     return true;
 }
 
-bool Controladora::eliminarCurso(UniversidadAlbertoMagno *u,string id) {
+bool Controladora::eliminarCurso(UniversidadAlbertoMagno *u, string id) {
+
     Curso* c = u->getListaCursos()->buscar(id);
-    if (c == nullptr) {
-        return false;
+    if (c == nullptr) return false;
+
+    NodoPersonas* ne = u->getListaEstudiantes()->getPrimero();
+    while (ne != nullptr) {
+        Persona* e = ne->getPersona();
+        Horario* h = e->getHorario();
+        if (h != nullptr) {
+            Curso* ch = h->buscarCurso(id);
+            if (ch != nullptr) {
+                h->eliminarCurso(ch->getDia(), ch->getHora());
+            }
+        }
+        ne = ne->getSig();
+    }
+
+    Persona* p = c->getProfesorAsignado();
+    if (p != nullptr && p->getHorario() != nullptr) {
+        p->getHorario()->eliminarCurso(c->getDia(), c->getHora());
     }
 
     u->getListaCursos()->eliminar(id);
+
     return true;
 }
 
 bool Controladora::reasignarProfesor(UniversidadAlbertoMagno *u, string idCurso, string idProfesor) {
-    Curso *cursoAux = u->getListaCursos()->buscar(idCurso);
-    Persona *profesorAux = u->getListaProfesores()->buscar(idProfesor);
+    bool resultado = false;
 
-    if (cursoAux == nullptr || profesorAux == nullptr) {
-        return false;
+    if (u != nullptr) {
+
+        Curso* cursoAux = u->getListaCursos()->buscar(idCurso);
+        Persona* nuevoProf = u->getListaProfesores()->buscar(idProfesor);
+
+        if (cursoAux != nullptr && nuevoProf != nullptr) {
+
+            Persona* profeViejo = cursoAux->getProfesorAsignado();
+
+            if (profeViejo != nullptr) {
+                profeViejo->desmatricularCurso(idCurso);
+            }
+
+            if (nuevoProf->getHorario()->buscarCurso(idCurso) == nullptr) {
+
+                cursoAux->setProfesorAsignado(nuevoProf);
+                nuevoProf->matricularCurso(cursoAux);
+                resultado = true;
+            }
+        }
     }
-
-    if (profesorAux->getHorario()->buscarCurso(idCurso)==nullptr) {
-        cursoAux->setProfesorAsignado(profesorAux);
-        profesorAux->matricularCurso(cursoAux);
-        return true;
-    }
-
-    return false;
+    return resultado;
 }
 
 bool Controladora::cambiarNota(UniversidadAlbertoMagno *u, string idProf, string idCur, string idEst, double nuevaNota) {
@@ -138,6 +166,7 @@ bool Controladora::cambiarNota(UniversidadAlbertoMagno *u, string idProf, string
 }
 
 bool Controladora::matricularCurso(UniversidadAlbertoMagno *u,string idEstudiante,string idCurso) {
+
     if (u == nullptr) return false;
 
     Persona* estudiante = u->getListaEstudiantes()->buscar(idEstudiante);
@@ -150,6 +179,9 @@ bool Controladora::matricularCurso(UniversidadAlbertoMagno *u,string idEstudiant
 
     if (!estudiante->matricularCurso(curso))
         return false;
+
+    curso->getListaEstudiantes()->agregarPrimero(estudiante);
+
     curso->setCuposAsignados(curso->getCuposAsignados() + 1);
     return true;
 }
@@ -280,4 +312,56 @@ string Controladora::mostrarHorarioAlumno(UniversidadAlbertoMagno *u, string id)
     if (aux==nullptr) return "";
 
     return aux->getHorario()->toString();
+}
+
+
+void Controladora::cargarDatosPrueba(UniversidadAlbertoMagno* u) {
+
+    // ===== ESTUDIANTES =====
+    for (int i = 1; i <= 6; i++) {
+        u->getListaEstudiantes()->agregarPrimero(
+            new Estudiante(to_string(i), "Alumno_" + to_string(i))
+        );
+    }
+
+    // ===== PROFESORES =====
+    u->getListaProfesores()->agregarPrimero(new Profesor("1", "Profe_A"));
+    u->getListaProfesores()->agregarPrimero(new Profesor("2", "Profe_B"));
+
+    // ===== CURSOS =====
+    Curso* c1 = new Curso("A1", "Calculo", 1, 9, nullptr, 3);
+    Curso* c2 = new Curso("B2", "Programacion", 3, 11, nullptr, 3);
+    Curso* c3 = new Curso("C3", "Fisica", 5, 15, nullptr, 3);
+
+    u->getListaCursos()->agregarPrimero(c1);
+    u->getListaCursos()->agregarPrimero(c2);
+    u->getListaCursos()->agregarPrimero(c3);
+
+    // ASIGNAR PROFESORES COMO EN LA INTERFAZ
+    reasignarProfesor(u, "A1", "2");
+    reasignarProfesor(u, "B2", "2");
+    reasignarProfesor(u, "C3", "1");
+
+
+    // ===== MATRICULAS =====
+    for (int i = 1; i <= 6; i++) {
+
+        Estudiante* e = (Estudiante*)u->getListaEstudiantes()->buscar(to_string(i));
+
+        if (e != nullptr) {
+            e->matricularCurso(c1);
+            e->matricularCurso(c2);
+
+            if (i % 2 == 0) {
+                e->matricularCurso(c3);
+            }
+
+            e->setCalificacionGlobal( 60 );
+            e->setCalificacionGlobal( 70 );
+
+            if (i % 2 == 0) {
+                e->setCalificacionGlobal(80);
+            }
+        }
+    }
 }
