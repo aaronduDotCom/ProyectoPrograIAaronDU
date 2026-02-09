@@ -25,6 +25,9 @@ public:
     Curso *buscar(string id);
 
     string toString();
+
+    void guardarDatos(FILE *fileName);
+    void cargarDatos(FILE *fileName);
 };
 
 

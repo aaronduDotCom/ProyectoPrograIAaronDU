@@ -70,9 +70,7 @@ bool Profesor::desasignarCurso(string cod) {
 }
 
 string Profesor::toString() {
-    stringstream ss;
-    ss << Persona::toString();
-    return ss.str();
+    return Persona::toString();
 }
 
 double Profesor::calcularPromedio() {

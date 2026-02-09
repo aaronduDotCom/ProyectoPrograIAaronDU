@@ -51,7 +51,5 @@ bool Estudiante::desmatricularCurso(string cod) {
 
 
 string Estudiante::toString() {
-    stringstream ss;
-    ss << Persona::toString();
-    return ss.str();
+    return Persona::toString();
 }

@@ -41,17 +41,25 @@ void Curso::setCuposAsignados(int cuposAsignados) {this->cuposAsignados = cuposA
 
 void Curso::setProfesorAsignado(Persona *profesor) {this->profesorAsignado = profesor;}
 
+//Hecho asi para leerlo despues
 string Curso::toString() {
     stringstream ss;
-    ss << nombre << endl << codigo << endl;
+
+    ss << codigo << ";"
+       << nombre << ";"
+        << dia << ";"
+        << hora << ";";
 
     if (profesorAsignado != nullptr)
-        ss << profesorAsignado->getNombre() << "\n\n";
+        ss << profesorAsignado->getId();
     else
-        ss << "Sin profesor asignado\n\n";
+        ss << "NULL";
+
+    ss << limiteCupos << ";";
 
     return ss.str();
 }
+
 
 double Curso::calcularPromedio() {
     double suma = 0;

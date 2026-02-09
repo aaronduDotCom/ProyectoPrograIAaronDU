@@ -24,6 +24,6 @@ void Persona::setId(string id) {identificacion=id;}
 
 string Persona::toString() {
     stringstream ss;
-    ss << nombreCompleto << " " << identificacion << "\n";
+    ss << identificacion << ";" << nombreCompleto << "\n";
     return ss.str();
 }

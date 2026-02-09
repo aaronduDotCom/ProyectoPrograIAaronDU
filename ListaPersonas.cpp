@@ -118,3 +118,18 @@ string ListaPersonas::toString() {
 
     return resultado.str();
 }
+
+void ListaPersonas::guardarDatos(FILE *fileName) {
+    if (fileName) {
+        actual=primero;
+        while (actual!=nullptr) {
+            fprintf(fileName,"%s", actual->getPersona()->toString().c_str());
+
+            actual=actual->getSig();
+        }
+    }
+}
+
+void ListaPersonas::cargarDatos(FILE *fileName) {
+
+}

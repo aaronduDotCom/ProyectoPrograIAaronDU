@@ -6,7 +6,7 @@
 #define PROYECTOPROGRAIAARONDU_LISTAPERSONAS_H
 
 #include "NodoPersonas.h"
-#include <sstream>
+#include <cstdio>
 #include <string>
 
 using namespace std;
@@ -32,6 +32,9 @@ public:
     Persona *buscar(string id);
 
     string toString();
+
+    void guardarDatos(FILE *fileName);
+    void cargarDatos(FILE *fileName);
 };
 
 

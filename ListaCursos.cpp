@@ -119,3 +119,18 @@ string ListaCursos::toString() {
 
     return resultado.str();
 }
+
+void ListaCursos::guardarDatos(FILE *fileName) {
+    if (fileName) {
+        actual=primero;
+        while (actual!=nullptr) {
+            fprintf(fileName,"%s", actual->getCurso()->toString().c_str());
+
+            actual=actual->getSig();
+        }
+    }
+}
+
+void ListaCursos::cargarDatos(FILE *fileName) {
+
+}

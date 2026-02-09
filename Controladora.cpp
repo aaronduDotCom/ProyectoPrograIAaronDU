@@ -314,7 +314,7 @@ string Controladora::mostrarHorarioAlumno(UniversidadAlbertoMagno *u, string id)
     return aux->getHorario()->toString();
 }
 
-
+//pruebita montada por gpt
 void Controladora::cargarDatosPrueba(UniversidadAlbertoMagno* u) {
 
     // ===== ESTUDIANTES =====
