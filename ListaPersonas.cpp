@@ -4,6 +4,9 @@
 
 #include "ListaPersonas.h"
 
+#include "Estudiante.h"
+#include "Profesor.h"
+
 ListaPersonas::ListaPersonas() {
     primero=nullptr;
     actual=nullptr;
@@ -130,6 +133,49 @@ void ListaPersonas::guardarDatos(FILE *fileName) {
     }
 }
 
-void ListaPersonas::cargarDatos(FILE *fileName) {
+//Para estos si me ayude de chat
+void ListaPersonas::cargarDatosEst(FILE *fileName) {
+    if (fileName) {
+        char buffer[256];
 
+        while (fgets(buffer, sizeof(buffer), fileName)) {
+            string linea(buffer);
+
+            if (!linea.empty() && linea.back() == '\n') {
+                linea.pop_back();
+            }
+
+            stringstream ss(linea);
+            string id, nombre;
+
+            getline(ss, id, ';');
+            getline(ss, nombre);
+
+            Persona* p = new Estudiante(id,nombre);
+            agregarPrimero(p);
+        }
+    }
+}
+
+void ListaPersonas::cargarDatosProf(FILE *fileName) {
+    if (fileName) {
+        char buffer[256];
+
+        while (fgets(buffer, sizeof(buffer), fileName)) {
+            string linea(buffer);
+
+            if (!linea.empty() && linea.back() == '\n') {
+                linea.pop_back();
+            }
+
+            stringstream ss(linea);
+            string id, nombre;
+
+            getline(ss, id, ';');
+            getline(ss, nombre);
+
+            Persona* p = new Profesor(id,nombre);
+            agregarPrimero(p);
+        }
+    }
 }

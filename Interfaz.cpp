@@ -38,24 +38,9 @@ bool Interfaz::leerDouble(double& x) {
 
 void Interfaz::ejecutarInterfaz(Controladora*c) {
 
-    FILE*archivoEstudiantesLeer=fopen("archivoEstudiantes.txt","r");
-    FILE*archivoProfesoresLeer=fopen("archivoProfesores.txt","r");
-    FILE*archivoCursosLeer=fopen("archivoCursos.txt","r");
-
-    if (!archivoEstudiantesLeer||!archivoProfesoresLeer||!archivoCursosLeer) {
-        printf("Error: Alguno o todos los archivos no se pudieron abrir\n");
-        return;
-    }
-
-    ualma->getListaEstudiantes()->leerDatos(archivoEstudiantesLeer);
-    ualma->getListaProfesores()->leerDatos(archivoProfesoresLeer);
-    ualma->getListaCursos()->leerDatos(archivoCursosLeer);
+    ualma->cargarDatos();
 
     int opcion=1;
-
-    cout << "Cargando datos de prueba..." << endl;
-    c->cargarDatosPrueba(ualma);
-    cout << "Datos cargados correctamente" << endl;
 
     while (opcion!=0) {
         {
@@ -581,21 +566,9 @@ void Interfaz::ejecutarInterfaz(Controladora*c) {
             default:break;
         }
     }
+
     //Guardar tod o
-    FILE*archivoEstudiantes=fopen("archivoEstudiantes.txt","w");
-    FILE*archivoProfesores=fopen("archivoProfesores.txt","w");
-    FILE*archivoCursos=fopen("archivoCursos.txt","w");
 
-    if (!archivoEstudiantes||!archivoProfesores||!archivoCursos) {
-        printf("Error: Alguno o todos los archivos no se pudieron abrir\n");
-        return;
-    }
+    ualma->guardarDatos();
 
-    ualma->getListaEstudiantes()->guardarDatos(archivoEstudiantes);
-    ualma->getListaProfesores()->guardarDatos(archivoProfesores);
-    ualma->getListaCursos()->guardarDatos(archivoCursos);
-
-    fclose(archivoEstudiantes);
-    fclose(archivoProfesores);
-    fclose(archivoCursos);
 }

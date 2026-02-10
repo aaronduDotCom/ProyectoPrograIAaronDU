@@ -55,3 +55,39 @@ void UniversidadAlbertoMagno::eliminarCursos() {
         delete c;
     }
 }
+
+void UniversidadAlbertoMagno::cargarDatos() {
+    FILE*archivoEstudiantesLeer=fopen("archivoEstudiantes.txt","r");
+    FILE*archivoProfesoresLeer=fopen("archivoProfesores.txt","r");
+    FILE*archivoCursosLeer=fopen("archivoCursos.txt","r");
+
+    if (archivoEstudiantesLeer)
+        listaEstudiantes->cargarDatosEst(archivoEstudiantesLeer);
+    if (archivoProfesoresLeer)
+        listaProfesores->cargarDatosProf(archivoProfesoresLeer);
+    if (archivoCursosLeer)
+        listaCursos->cargarDatos(archivoCursosLeer, listaProfesores);
+
+    if (archivoEstudiantesLeer) fclose(archivoEstudiantesLeer);
+    if (archivoProfesoresLeer) fclose(archivoProfesoresLeer);
+    if (archivoCursosLeer) fclose(archivoCursosLeer);
+}
+
+void UniversidadAlbertoMagno::guardarDatos() {
+    FILE*archivoEstudiantes=fopen("archivoEstudiantes.txt","w");
+    FILE*archivoProfesores=fopen("archivoProfesores.txt","w");
+    FILE*archivoCursos=fopen("archivoCursos.txt","w");
+
+    if (!archivoEstudiantes||!archivoProfesores||!archivoCursos) {
+        printf("Error: Alguno o todos los archivos no se pudieron abrir\n");
+        return;
+    }
+
+    listaEstudiantes->guardarDatos(archivoEstudiantes);
+    listaProfesores->guardarDatos(archivoProfesores);
+    listaCursos->guardarDatos(archivoCursos);
+
+    fclose(archivoEstudiantes);
+    fclose(archivoProfesores);
+    fclose(archivoCursos);
+}

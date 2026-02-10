@@ -20,7 +20,7 @@ protected:
     string identificacion; //5 digitos
 public:
     Persona();
-    Persona(string nombre, string identificacion);
+    Persona(string identificacion, string nombreCompleto);
     virtual ~Persona()=default;
 
     string getNombre();

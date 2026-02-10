@@ -12,7 +12,7 @@ bool Controladora::registrarEstudiante(UniversidadAlbertoMagno* u, string nombre
         return false;
     }
 
-    Persona* estudiante = new Estudiante(nombre, id);
+    Persona* estudiante = new Estudiante(id, nombre);
     u->getListaEstudiantes()->agregarPrimero(estudiante);
     return true;
 }
@@ -22,7 +22,7 @@ bool Controladora::registrarProfesores(UniversidadAlbertoMagno *u, string nombre
         return false;
     }
 
-    Persona* profesor = new Profesor(nombre, id);
+    Persona* profesor = new Profesor(id, nombre);
     u->getListaProfesores()->agregarPrimero(profesor);
     return true;
 }

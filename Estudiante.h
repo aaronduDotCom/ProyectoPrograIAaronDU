@@ -19,7 +19,7 @@ private:
     Horario* horario;
 public:
     Estudiante();
-    Estudiante(string nombre, string id);
+    Estudiante(string id, string nombre);
     ~Estudiante() override;
 
     double getCalificacionGlobal() override;

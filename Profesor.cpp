@@ -8,7 +8,7 @@ Profesor::Profesor():Persona() {
     horario = new Horario();
 }
 
-Profesor::Profesor(string nombre, string id):Persona(nombre,id) {
+Profesor::Profesor(string identificacion, string nombreCompleto):Persona(identificacion,nombreCompleto) {
     horario = new Horario();
 }
 

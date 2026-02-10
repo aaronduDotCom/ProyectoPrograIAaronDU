@@ -4,6 +4,9 @@
 
 #include "ListaCursos.h"
 
+#include "Profesor.h"
+#include "ListaPersonas.h"
+
 ListaCursos::ListaCursos() {
     primero=nullptr;
     actual=nullptr;
@@ -131,6 +134,39 @@ void ListaCursos::guardarDatos(FILE *fileName) {
     }
 }
 
-void ListaCursos::cargarDatos(FILE *fileName) {
+void ListaCursos::cargarDatos(FILE* fileName, ListaPersonas* listaProfesores) {
+    if (fileName && listaProfesores) {
+        char buffer[256];
 
+        while (fgets(buffer, sizeof(buffer), fileName)) {
+            string linea(buffer);
+
+            if (!linea.empty() && linea.back() == '\n') {
+                linea.pop_back();
+            }
+
+            stringstream ss(linea);
+            string codigo, nombre, diaStr, horaStr, cuposStr, idProfesor;
+
+            getline(ss, codigo, ';');
+            getline(ss, nombre, ';');
+            getline(ss, diaStr, ';');
+            getline(ss, horaStr, ';');
+            getline(ss, cuposStr, ';');
+            getline(ss, idProfesor);
+
+            Persona* profe = listaProfesores->buscar(idProfesor);
+
+            if (profe != nullptr) {
+                int dia = stoi(diaStr);
+                int hora = stoi(horaStr);
+                int limiteCupos = stoi(cuposStr);
+
+                Curso* c = new Curso(codigo, nombre, dia, hora, profe, limiteCupos);
+                c->setProfesorAsignado(profe);
+
+                agregarPrimero(c);
+            }
+        }
+    }
 }

@@ -9,7 +9,9 @@ Estudiante::Estudiante():Persona() {
     horario = new Horario();
 }
 
-Estudiante::Estudiante(string nombre, string id):Persona(nombre,id) {
+
+
+Estudiante::Estudiante(string id, string nombre):Persona(id,nombre) {
     calificacionGlobal = 0;
     horario = new Horario();
 }

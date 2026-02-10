@@ -34,7 +34,8 @@ public:
     string toString();
 
     void guardarDatos(FILE *fileName);
-    void cargarDatos(FILE *fileName);
+    void cargarDatosEst(FILE *fileName);
+    void cargarDatosProf(FILE *fileName);
 };
 
 

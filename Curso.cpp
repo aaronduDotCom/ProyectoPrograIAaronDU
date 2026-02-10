@@ -51,11 +51,11 @@ string Curso::toString() {
         << hora << ";";
 
     if (profesorAsignado != nullptr)
-        ss << profesorAsignado->getId();
+        ss << profesorAsignado->getId()<< ";";
     else
-        ss << "NULL";
+        ss << "NULL;";
 
-    ss << limiteCupos << ";";
+    ss << limiteCupos<<"\n";
 
     return ss.str();
 }

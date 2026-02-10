@@ -24,6 +24,9 @@ public:
     void eliminarEstudiantes();
     void eliminarProfesores();
     void eliminarCursos();
+
+    void cargarDatos();
+    void guardarDatos();
 };
 
 

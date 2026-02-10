@@ -9,9 +9,9 @@ Persona::Persona() {
     identificacion="";
 }
 
-Persona::Persona(string nombre, string id) {
-    nombreCompleto=nombre;
-    identificacion=id;
+Persona::Persona(string identificacion, string nombreCompleto) {
+    this->identificacion=identificacion;
+    this->nombreCompleto=nombreCompleto;
 }
 
 string Persona::getNombre() {return nombreCompleto;}
