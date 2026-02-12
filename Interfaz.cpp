@@ -233,7 +233,7 @@ void Interfaz::ejecutarInterfaz(Controladora*c) {
                             Persona *auxEst=ualma->getListaEstudiantes()->buscar(idEst);
 
                             if (auxEst!=nullptr) {
-                                cout <<auxEst->getHorario()->toString();
+                                cout <<auxEst->getHorario()->toDisplayString();
                             } else {
                                 cout <<"El estudiante no se encontro\n";
                             }
@@ -348,7 +348,7 @@ void Interfaz::ejecutarInterfaz(Controladora*c) {
                                 Persona *auxProf=ualma->getListaProfesores()->buscar(idProf);
 
                                 if (auxProf!=nullptr) {
-                                    cout <<auxProf->getHorario()->toString();
+                                    cout <<auxProf->getHorario()->toDisplayString();
                                 } else {
                                     cout <<"El profesor no se encontro\n";
                                 }
@@ -459,7 +459,7 @@ void Interfaz::ejecutarInterfaz(Controladora*c) {
 
                             Curso* p = ualma->getListaCursos()->buscar(id);
                             if (p != nullptr) {
-                                cout << p->toString();
+                                cout << p->toDisplayString();
                             }
                         }break;
                         case 2: {
@@ -494,7 +494,7 @@ void Interfaz::ejecutarInterfaz(Controladora*c) {
                             Curso *aux=ualma->getListaCursos()->buscar(id);
 
                             if (aux!=nullptr) {
-                                cout <<aux->toString();
+                                cout <<aux->toDisplayString();
                             } else {
                                 cout <<"El curso no se encontro\n";
                             }
@@ -570,5 +570,4 @@ void Interfaz::ejecutarInterfaz(Controladora*c) {
     //Guardar tod o
 
     ualma->guardarDatos();
-
 }

@@ -116,7 +116,7 @@ string ListaCursos::toString() {
     actual = primero;
 
     while (actual != nullptr) {
-        resultado << actual->getCurso()->toString() << "\n";
+        resultado << actual->getCurso()->toDisplayString() << "\n";
         actual = actual->getSig();
     }
 
@@ -146,14 +146,15 @@ void ListaCursos::cargarDatos(FILE* fileName, ListaPersonas* listaProfesores) {
             }
 
             stringstream ss(linea);
-            string codigo, nombre, diaStr, horaStr, cuposStr, idProfesor;
+            string codigo, nombre, diaStr, horaStr, idProfesor, cuposStr;
 
             getline(ss, codigo, ';');
             getline(ss, nombre, ';');
             getline(ss, diaStr, ';');
             getline(ss, horaStr, ';');
-            getline(ss, cuposStr, ';');
-            getline(ss, idProfesor);
+            getline(ss, idProfesor, ';');
+            getline(ss, cuposStr);
+
 
             Persona* profe = listaProfesores->buscar(idProfesor);
 
@@ -163,7 +164,6 @@ void ListaCursos::cargarDatos(FILE* fileName, ListaPersonas* listaProfesores) {
                 int limiteCupos = stoi(cuposStr);
 
                 Curso* c = new Curso(codigo, nombre, dia, hora, profe, limiteCupos);
-                c->setProfesorAsignado(profe);
 
                 agregarPrimero(c);
             }

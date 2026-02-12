@@ -31,6 +31,7 @@ public:
     Curso *buscarCurso(string codigo);
 
     string toString();
+    string toDisplayString();
 };
 
 #endif //PROYECTOPROGRAIAARONDU_HORARIO_H

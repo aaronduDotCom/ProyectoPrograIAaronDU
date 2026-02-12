@@ -9,6 +9,7 @@
 #include <cstdio>
 #include <string>
 
+class ListaCursos;
 using namespace std;
 
 class NodoPersonas;
@@ -34,8 +35,11 @@ public:
     string toString();
 
     void guardarDatos(FILE *fileName);
+    void guardarHorarios(FILE *fileName);
+
     void cargarDatosEst(FILE *fileName);
     void cargarDatosProf(FILE *fileName);
+    void cargarHorarios(FILE* archivo, ListaCursos* listaCursos);
 };
 
 

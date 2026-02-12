@@ -57,37 +57,61 @@ void UniversidadAlbertoMagno::eliminarCursos() {
 }
 
 void UniversidadAlbertoMagno::cargarDatos() {
-    FILE*archivoEstudiantesLeer=fopen("archivoEstudiantes.txt","r");
+    //1
     FILE*archivoProfesoresLeer=fopen("archivoProfesores.txt","r");
+    //2
     FILE*archivoCursosLeer=fopen("archivoCursos.txt","r");
+    //3
+    FILE*archivoEstudiantesLeer=fopen("archivoEstudiantes.txt","r");
+    //4
+    FILE* archivoHorariosEst = fopen("archivoHorariosEst.txt", "r");
+    //5
+    FILE* archivoHorariosProf = fopen("archivoHorariosProf.txt", "r");
 
-    if (archivoEstudiantesLeer)
-        listaEstudiantes->cargarDatosEst(archivoEstudiantesLeer);
+
     if (archivoProfesoresLeer)
         listaProfesores->cargarDatosProf(archivoProfesoresLeer);
     if (archivoCursosLeer)
         listaCursos->cargarDatos(archivoCursosLeer, listaProfesores);
+    if (archivoEstudiantesLeer)
+        listaEstudiantes->cargarDatosEst(archivoEstudiantesLeer);
+    if (archivoHorariosEst)
+        listaEstudiantes->cargarHorarios(archivoHorariosEst, listaCursos);
+    if (archivoHorariosProf)
+        listaProfesores->cargarHorarios(archivoHorariosProf, listaCursos);
 
-    if (archivoEstudiantesLeer) fclose(archivoEstudiantesLeer);
     if (archivoProfesoresLeer) fclose(archivoProfesoresLeer);
     if (archivoCursosLeer) fclose(archivoCursosLeer);
+    if (archivoEstudiantesLeer) fclose(archivoEstudiantesLeer);
+
+    if (archivoHorariosEst) fclose(archivoHorariosEst);
+    if (archivoHorariosProf) fclose(archivoHorariosProf);
 }
 
 void UniversidadAlbertoMagno::guardarDatos() {
-    FILE*archivoEstudiantes=fopen("archivoEstudiantes.txt","w");
     FILE*archivoProfesores=fopen("archivoProfesores.txt","w");
     FILE*archivoCursos=fopen("archivoCursos.txt","w");
+    FILE*archivoEstudiantes=fopen("archivoEstudiantes.txt","w");
 
-    if (!archivoEstudiantes||!archivoProfesores||!archivoCursos) {
+    FILE*archivoHorariosEst = fopen("archivoHorariosEst.txt", "w");
+    FILE*archivoHorariosProf = fopen("archivoHorariosProf.txt", "w");
+
+    if (!archivoEstudiantes||!archivoProfesores||!archivoCursos||!archivoHorariosEst||!archivoHorariosProf) {
         printf("Error: Alguno o todos los archivos no se pudieron abrir\n");
         return;
     }
 
-    listaEstudiantes->guardarDatos(archivoEstudiantes);
     listaProfesores->guardarDatos(archivoProfesores);
     listaCursos->guardarDatos(archivoCursos);
+    listaEstudiantes->guardarDatos(archivoEstudiantes);
+
+    listaEstudiantes->guardarHorarios(archivoHorariosEst);
+    listaProfesores->guardarHorarios(archivoHorariosProf);
 
     fclose(archivoEstudiantes);
     fclose(archivoProfesores);
     fclose(archivoCursos);
+
+    fclose(archivoHorariosEst);
+    fclose(archivoHorariosProf);
 }

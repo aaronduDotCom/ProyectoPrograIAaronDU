@@ -1,0 +1,40 @@
+    Hooooola profe, en este documento le voy a enlistar algunas
+pruebas que ya hize y que funcionaron, ojo algunas las comprobé
+antes de implemtar la persistencia de datos y otras no.
+
+    Ademas de que espero poder dejarle ya preparados un par de
+datos para que ust pueda haer sus propias pruebas y no deba
+crear tod o de 0.
+
+PRUEBAS
+
+1.Mostrar todos los estudiantes
+2.Mostrar todos los profesores
+3.Mostrar todos los cursos
+
+4.Agregar varios estudiantes
+5.Quitar estudiantes hasta quedar en 0
+6.Matricular y desmatricular cursos
+7.Matricular y desmatricular varios estudiantes de un curso
+8.Mostrar la informacion de estudiantes individualmente
+9.Ver el estudiante de un estudiante
+10.Ver la nota de un estudiante
+11.Consultas de datos que no existen
+
+12.Agregar varios profesores
+13.Quitar profesores hasta quedar en 0
+14.Mostrar la informacion de profesores individualmente
+15.Cambiar la nota de estudiantes, solo pudiendo cambiar la de
+los estudiantes que pertnescan al curso del que el profesor sea
+el asignado.
+16.Consultar el promedio de todos los estudiantes de todos los
+cursos del profesor
+
+17.Agregar varios cursos
+18.Intentar agregar un curso con un profesor inexistente
+19.Quitar cursos hasta quedar en 0
+20.Mostrar la informacion de un curso individualmente
+21.Consultar el promedio de todos los estudiantes de un curso
+22.Mostrar el profesor asignado de un curso
+23.Reasignar el profesor a asignado
+24.Intentar reasignar un profesor asignado a un curso

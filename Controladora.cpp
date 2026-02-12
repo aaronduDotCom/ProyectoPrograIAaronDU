@@ -304,14 +304,14 @@ string Controladora::mostrarHorarioProfesor(UniversidadAlbertoMagno *u, string i
     Persona *aux= u->getListaProfesores()->buscar(id);
     if (aux==nullptr) return "";
 
-    return aux->getHorario()->toString();
+    return aux->getHorario()->toDisplayString();
 }
 
 string Controladora::mostrarHorarioAlumno(UniversidadAlbertoMagno *u, string id) {
     Persona *aux= u->getListaEstudiantes()->buscar(id);
     if (aux==nullptr) return "";
 
-    return aux->getHorario()->toString();
+    return aux->getHorario()->toDisplayString();
 }
 
 //pruebita montada por gpt

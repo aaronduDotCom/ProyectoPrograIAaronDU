@@ -3,11 +3,9 @@
 #include "Controladora.h"
 
 int main() {
-    Controladora *c=new Controladora();
-    Interfaz *i=new Interfaz();
-    i->ejecutarInterfaz(c);
-    delete i;
-    delete c;
+    Controladora c;
+    Interfaz i;
+    i.ejecutarInterfaz(&c);
 
     return 0;
 }

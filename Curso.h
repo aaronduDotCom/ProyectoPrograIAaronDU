@@ -43,6 +43,7 @@ public:
     void setProfesorAsignado(Persona *profesor);
 
     string toString();
+    string toDisplayString();
 
     double calcularPromedio();
 };

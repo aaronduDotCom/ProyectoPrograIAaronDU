@@ -60,6 +60,31 @@ string Curso::toString() {
     return ss.str();
 }
 
+string Curso::toDisplayString() {
+    stringstream ss;
+
+
+    ss << "Codigo: " << codigo << "\n";
+    ss << "Nombre: " << nombre << "\n";
+
+    if (dia >= 0 && dia < 7)
+        ss << "Dia: " << dia << "\n";
+    else
+        ss << "Dia: No definido\n";
+
+    ss << "Hora: " << (hora + 8) << ":00\n";
+
+    if (profesorAsignado != nullptr)
+        ss << "Profesor asignado: " << profesorAsignado->getNombre()
+           << " (" << profesorAsignado->getId() << ")\n";
+    else
+        ss << "Profesor asignado: No asignado\n";
+
+    ss << "Limite de cupos: " << limiteCupos << "\n";
+
+    return ss.str();
+}
+
 
 double Curso::calcularPromedio() {
     double suma = 0;

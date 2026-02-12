@@ -30,13 +30,15 @@ Curso * Horario::getCurso(int x,int y) {
 }
 
 void Horario::setCurso(Curso *curso) {
-    if (curso->getDia() < 0 || curso->getDia() > 6) return;
-    if (curso->getHora() < 0 || curso->getHora() > 11) return;
+    if (curso == nullptr) return;
 
     int dia = curso->getDia();
     int hora = curso->getHora();
 
-    *(*(m+dia)+hora)=curso;
+    if (dia < 0 || dia >= DIAS) return;
+    if (hora < 0 || hora >= FRANJA) return;
+
+    m[dia][hora] = curso;
 }
 
 void Horario::eliminarCurso(int dia, int hora) {
@@ -88,8 +90,28 @@ Curso *Horario::buscarCurso(string codigo) {
     return nullptr;
 }
 
-//Este si me lo medio hizo mi compa gpt
 string Horario::toString() {
+    stringstream ss;
+
+    for (int i = 0; i < FRANJA; i++) {
+        for (int j = 0; j < DIAS; j++) {
+
+            if (*(*(m+i)+j) != nullptr){
+                ss << (*(*(m+i)+j))->getCodigo();
+            }else
+                ss << "0";
+
+            if (j < DIAS-1)
+                ss << ";";
+        }
+        ss << "\n";
+    }
+    return ss.str();
+}
+
+
+//Este si me lo medio hizo mi compa gpt
+string Horario::toDisplayString() {
     stringstream ss;
 
     ss << "Horario \n";
